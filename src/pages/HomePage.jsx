@@ -9,9 +9,11 @@ const HomePage = () => {
           alt="Almost Home Canine Rescue Banner Image" 
           style={{ objectPosition: 'center' }}
         />
-        <h2 className="text-[18px] leading-[1.2em] text-center text-[#523A28] font-sans tracking-[0.05em]">
+        <h2 className="text-[18px] leading-[1.2em] flex justify-end text-[#523A28] font-sans tracking-[0.05em]">
+          <div className="text-center">
           <strong>PLEASE NOTE:&nbsp;</strong>
-            Meet &amp; greets are by appointment only after initial phone interview.
+            Meet &amp; greets are by appointment<br />only after initial phone interview.
+          </div>
         </h2>
       </section>
       <section className="mb-12 text-center">
