@@ -2,7 +2,14 @@ import React from 'react';
 
 const HomePage = () => {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 ">
+      <section className="mb-12">
+        <img 
+          src="/assets/images/ahcr.png" 
+          alt="Almost Home Canine Rescue Banner Image" 
+          style={{ objectPosition: 'center' }}
+        />
+        </section>
       <section className="mb-12 text-center">
         <h1 className="text-4xl font-bold text-[#9c7459] mb-4">Welcome to Almost Home Canine Rescue</h1>
         <p className="text-xl text-gray-700 max-w-3xl mx-auto">
