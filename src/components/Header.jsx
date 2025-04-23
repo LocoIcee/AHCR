@@ -55,10 +55,10 @@ const Header = () => {
             DONATE
           </Link>
           <div className="flex items-center space-x-3">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <a href="https://facebook.com/AHCRYYC" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <FacebookIcon className="h-6 w-6 text-white hover:text-gray-200 transition-colors" />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a href="https://instagram.com/almost_home_canine_rescue" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <InstagramIcon className="h-6 w-6 text-white hover:text-gray-200 transition-colors" />
             </a>
           </div>
