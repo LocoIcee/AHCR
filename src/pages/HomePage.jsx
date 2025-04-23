@@ -9,7 +9,25 @@ const HomePage = () => {
           alt="Almost Home Canine Rescue Banner Image" 
           style={{ objectPosition: 'center' }}
         />
-        </section>
+        <h2 class="font_2 wixui-rich-text__text" style="font-size:18px; line-height:1.2em; text-align:center;">
+          <span style="color:#523A28;" class="wixui-rich-text__text">
+            <span style="letter-spacing:0.05em;" class="wixui-rich-text__text">
+              <span style="font-size:18px;" class="wixui-rich-text__text">
+                <span style="font-family:open sans condensed,sans-serif;" class="wixui-rich-text__text">PLEASE NOTE:&nbsp;
+                </span>
+              </span>
+            </span>
+          </span>
+          <span class="color_23 wixui-rich-text__text">
+            <span style="letter-spacing:0.05em;" class="wixui-rich-text__text">
+              <span style="font-size:18px;" class="wixui-rich-text__text">
+                <span style="font-family:open sans condensed,sans-serif;" class="wixui-rich-text__text">Meet &amp; greets are by appointment only after initial phone interview.
+                </span>
+              </span>
+            </span>
+          </span>
+        </h2>
+      </section>
       <section className="mb-12 text-center">
         <h1 className="text-4xl font-bold text-[#9c7459] mb-4">Welcome to Almost Home Canine Rescue</h1>
         <p className="text-xl text-gray-700 max-w-3xl mx-auto">
