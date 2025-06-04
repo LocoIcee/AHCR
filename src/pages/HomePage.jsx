@@ -98,7 +98,7 @@ const HomePage = () => {
             <p className="text-gray-700 mb-4">
               Give a deserving dog a forever home and change their life forever.
             </p>
-            <Link to={`${import.meta.env.BASE_URL}adopt`} className="inline-block bg-[#9c7459] hover:bg-[#7d5c46] text-white py-2 px-4 rounded">
+            <Link to="adopt" className="inline-block bg-[#9c7459] hover:bg-[#7d5c46] text-white py-2 px-4 rounded">
               View Dogs
             </Link>
           </div>
