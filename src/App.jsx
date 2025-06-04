@@ -9,7 +9,7 @@ import MorePage from './pages/MorePage';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/AHCanineRescue/">
       <div className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-grow">

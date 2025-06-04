@@ -42,7 +42,11 @@ const AdoptPage = () => {
           {/* These would be replaced with actual dog data later */}
           {[...Array(6)].map((_, index) => (
             <div key={index} className="bg-white shadow-md rounded-lg overflow-hidden">
-              <div className="h-64 bg-gray-300"></div>
+              <img 
+                src={`${import.meta.env.BASE_URL}assets/images/placeholder.png`} 
+                alt="Dog" 
+                className="w-full h-64 object-cover"
+              />
               <div className="p-4">
                 <h3 className="font-bold text-xl mb-2">Dog Name</h3>
                 <p className="text-gray-600 mb-2">Age • Sex • Breed</p>

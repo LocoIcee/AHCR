@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
     <div className="container mx-auto px-4 ">
       <section className="mb-12">
         <img 
-          src="/assets/images/ahcr.png" 
+          src={`${import.meta.env.BASE_URL}assets/images/ahcr.png`} 
           alt="Almost Home Canine Rescue Banner Image" 
           style={{ objectPosition: 'center' }}
         />
@@ -43,7 +44,11 @@ const HomePage = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* These would be replaced with actual dog data later */}
           <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <div className="h-64 bg-gray-300"></div>
+            <img 
+              src={`${import.meta.env.BASE_URL}assets/images/placeholder.png`} 
+              alt="Dog placeholder" 
+              className="w-full h-64 object-cover"
+            />
             <div className="p-4">
               <h3 className="font-bold text-xl mb-2">Buddy</h3>
               <p className="text-gray-600 mb-2">2 years old • Male • Labrador Mix</p>
@@ -54,7 +59,11 @@ const HomePage = () => {
           </div>
           
           <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <div className="h-64 bg-gray-300"></div>
+            <img 
+              src={`${import.meta.env.BASE_URL}assets/images/placeholder.png`} 
+              alt="Dog placeholder" 
+              className="w-full h-64 object-cover"
+            />
             <div className="p-4">
               <h3 className="font-bold text-xl mb-2">Bella</h3>
               <p className="text-gray-600 mb-2">4 years old • Female • Shepherd Mix</p>
@@ -65,7 +74,11 @@ const HomePage = () => {
           </div>
           
           <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <div className="h-64 bg-gray-300"></div>
+            <img 
+              src={`${import.meta.env.BASE_URL}assets/images/placeholder.png`} 
+              alt="Dog placeholder" 
+              className="w-full h-64 object-cover"
+            />
             <div className="p-4">
               <h3 className="font-bold text-xl mb-2">Max</h3>
               <p className="text-gray-600 mb-2">1 year old • Male • Terrier Mix</p>
@@ -85,9 +98,9 @@ const HomePage = () => {
             <p className="text-gray-700 mb-4">
               Give a deserving dog a forever home and change their life forever.
             </p>
-            <button className="bg-[#9c7459] hover:bg-[#7d5c46] text-white py-2 px-4 rounded">
+            <Link to={`${import.meta.env.BASE_URL}adopt`} className="inline-block bg-[#9c7459] hover:bg-[#7d5c46] text-white py-2 px-4 rounded">
               View Dogs
-            </button>
+            </Link>
           </div>
           
           <div className="bg-white p-6 rounded-lg shadow-md">
