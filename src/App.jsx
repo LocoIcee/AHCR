@@ -6,6 +6,7 @@ import FosterPage from './pages/FosterPage';
 import GetInvolvedPage from './pages/GetInvolvedPage';
 import FundraisersPage from './pages/FundraisersPage';
 import MorePage from './pages/MorePage';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -22,9 +23,7 @@ function App() {
             <Route path="/more" element={<MorePage />} />
           </Routes>
         </main>
-        <footer className="bg-[#9c7459] text-white text-center py-4 mt-auto">
-          <p>&copy; {new Date().getFullYear()} Almost Home Canine Rescue. All Rights Reserved.</p>
-        </footer>
+          <Footer/>
       </div>
     </Router>
   );
