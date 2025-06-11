@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -11,6 +11,8 @@ const DogCard = ({
   description, 
   availability = 'available'  // can be 'available' or 'pending'
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden">
       <div className="relative">
@@ -31,12 +33,38 @@ const DogCard = ({
         <p className="text-gray-700 mb-4 line-clamp-3">
           {description}
         </p>
-        <Link to={`/adopt#application-form`}>
-          <button className="bg-[#9c7459] hover:bg-[#7d5c46] text-white py-2 px-4 rounded w-full transition">
-            Learn More & Apply
-          </button>
-        </Link>
+        <button
+          onClick={() => setIsOpen(true)}
+          className="bg-[#9c7459] hover:bg-[#7d5c46] text-white py-2 px-4 rounded w-full transition"
+        >
+          Learn More
+        </button>
       </div>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg w-[75%] max-w-[1200px] p-8 shadow-xl relative">
+            <button 
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+              onClick={() => setIsOpen(false)}
+            >
+              ✕
+            </button>
+            <div className="w-full aspect-video mb-6">
+              <img 
+                src={image} 
+                alt={`${name} - ${breed}`} 
+                className="w-full h-full object-contain rounded"
+              />
+            </div>
+            <h3 className="font-bold text-2xl mb-2">{name}</h3>
+            <p className="text-gray-600 mb-4">{age} • {sex} • {breed}</p>
+            <p className="text-gray-700 mb-4">{description}</p>
+            <button className="bg-[#5f8b88] hover:bg-[#4e7471] text-white py-2 px-4 rounded w-full">
+              Apply
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
