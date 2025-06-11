@@ -6,6 +6,7 @@ import FosterPage from './pages/FosterPage';
 import GetInvolvedPage from './pages/GetInvolvedPage';
 import FundraisersPage from './pages/FundraisersPage';
 import MorePage from './pages/MorePage';
+import AdminPage from './pages/AdminPage';
 import Footer from './components/Footer';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/get-involved" element={<GetInvolvedPage />} />
             <Route path="/fundraisers" element={<FundraisersPage />} />
             <Route path="/more" element={<MorePage />} />
+             <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </main>
           <Footer/>

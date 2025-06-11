@@ -15,7 +15,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.0.2",
-    "@supabase/supabase-js": "^2.47.12",
+    "@supabase/supabase-js": "^2.50.0",
     "@types/prop-types": "^15.7.14",
     "aos": "^2.3.4",
     "prop-types": "^15.8.1",
