@@ -59,6 +59,7 @@ const Header = () => {
             <Link to="/get-involved" className="text-lg font-medium hover:text-gray-200 transition-colors">Get Involved</Link>
             <Link to="/fundraisers" className="text-lg font-medium hover:text-gray-200 transition-colors">Fundraisers</Link>
             <Link to="/more" className="text-lg font-medium hover:text-gray-200 transition-colors">More</Link>
+            <Link to="/happytails" className="text-lg font-medium hover:text-gray-200 transition-colors">Happy Tails</Link>
           </div>
         </nav>
 

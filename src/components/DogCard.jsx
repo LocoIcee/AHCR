@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const DogCard = ({ 
   name, 
-  image, 
+  images, 
   age, 
   sex, 
   breed, 
@@ -12,12 +12,21 @@ const DogCard = ({
   availability = 'available'  // can be 'available' or 'pending'
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const handlePrevImage = () => {
+    setCurrentImage((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  };
+
+  const handleNextImage = () => {
+    setCurrentImage((prevIndex) => (prevIndex + 1) % images.length);
+  };
 
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+    <div className="bg-white shadow-md rounded-lg overflow-hidden flex flex-col h-full">
       <div className="relative">
         <img 
-          src={image} 
+          src={images[images.length - 1]} 
           alt={`${name} - ${breed}`} 
           className="w-full h-64 object-cover"
         />
@@ -27,34 +36,56 @@ const DogCard = ({
           {availability === 'pending' ? 'Application Pending' : 'Available'}
         </div>
       </div>
-      <div className="p-4">
-        <h3 className="font-bold text-xl mb-1">{name}</h3>
-        <p className="text-gray-600 mb-3">{age} • {sex} • {breed}</p>
-        <p className="text-gray-700 mb-4 line-clamp-3">
-          {description}
-        </p>
+      <div className="p-4 flex flex-col justify-between h-full">
+        <div>
+          <h3 className="font-bold text-xl mb-1">{name}</h3>
+          <p className="text-gray-600 mb-3">{age} • {sex} • {breed}</p>
+          <p className="text-gray-700 mb-4 line-clamp-3">
+            {description}
+          </p>
+        </div>
         <button
-          onClick={() => setIsOpen(true)}
-          className="bg-[#9c7459] hover:bg-[#7d5c46] text-white py-2 px-4 rounded w-full transition"
+          onClick={() => {
+            setCurrentImage(0);
+            setIsOpen(true);
+          }}
+          className="bg-[#9c7459] hover:bg-[#7d5c46] text-white py-2 px-4 rounded w-full transition mt-2"
         >
           Learn More
         </button>
       </div>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-lg w-[75%] max-w-[1200px] p-8 shadow-xl relative">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          onClick={() => setIsOpen(false)}
+        >
+          <div
+            className="bg-white rounded-lg w-[75%] max-w-[1200px] p-8 shadow-xl relative"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button 
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
               onClick={() => setIsOpen(false)}
             >
               ✕
             </button>
-            <div className="w-full aspect-video mb-6">
-              <img 
-                src={image} 
-                alt={`${name} - ${breed}`} 
-                className="w-full h-full object-contain rounded"
-              />
+            <div className="relative flex items-center justify-center mb-6">
+              <button 
+                className="absolute left-0 z-10 bg-white bg-opacity-75 p-2 rounded-full shadow hover:bg-opacity-100"
+                onClick={handlePrevImage}
+              >
+                ◀
+              </button>
+              <div
+                className="rounded w-full h-[400px] bg-center bg-cover"
+                style={{ backgroundImage: `url(${images[currentImage]})` }}
+              ></div>
+              <button 
+                className="absolute right-0 z-10 bg-white bg-opacity-75 p-2 rounded-full shadow hover:bg-opacity-100"
+                onClick={handleNextImage}
+              >
+                ▶
+              </button>
             </div>
             <h3 className="font-bold text-2xl mb-2">{name}</h3>
             <p className="text-gray-600 mb-4">{age} • {sex} • {breed}</p>
@@ -71,7 +102,7 @@ const DogCard = ({
 
 DogCard.propTypes = {
   name: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
   age: PropTypes.string.isRequired,
   sex: PropTypes.string.isRequired,
   breed: PropTypes.string.isRequired,

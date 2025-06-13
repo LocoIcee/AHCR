@@ -6,7 +6,9 @@ import FosterPage from './pages/FosterPage';
 import GetInvolvedPage from './pages/GetInvolvedPage';
 import FundraisersPage from './pages/FundraisersPage';
 import MorePage from './pages/MorePage';
+import HappyTailsPage from './pages/HappyTailsPage';
 import AdminPage from './pages/AdminPage';
+import LoginPage from './pages/LoginPage';
 import Footer from './components/Footer';
 
 function App() {
@@ -22,7 +24,10 @@ function App() {
             <Route path="/get-involved" element={<GetInvolvedPage />} />
             <Route path="/fundraisers" element={<FundraisersPage />} />
             <Route path="/more" element={<MorePage />} />
-             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/happytails" element={<HappyTailsPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/unauthorized" element={<p className="text-center mt-20">Unauthorized access.</p>} /> 
           </Routes>
         </main>
           <Footer/>

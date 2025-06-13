@@ -130,7 +130,7 @@ const AdoptPage = () => {
               <DogCard
                 key={dog.id}
                 name={dog.name}
-                image={dog.image}
+                images={dog.images}
                 age={dog.age}
                 sex={dog.sex}
                 breed={dog.breed}
