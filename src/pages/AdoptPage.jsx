@@ -4,10 +4,16 @@ import DogCard from '../components/DogCard';
 import AdoptionProcess from '../components/AdoptionProcess';
 import AvailabilityLabel from '../components/AvailabilityLabel';
 import { supabase } from '../data/supabaseClient';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const AdoptPage = () => {
   const [dogs, setDogs] = useState([]);
   const [filter, setFilter] = useState('all');
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
 
   useEffect(() => {
     const fetchDogs = async () => {
@@ -29,28 +35,28 @@ const AdoptPage = () => {
   const filteredDogs = filter === 'all' 
     ? dogs 
     : dogs.filter(dog => dog.availability === filter);
-  console.log('Dogs:', dogs);
-  console.log('Filtered:', filteredDogs);
+
   return (
-    <>
+    <div className="overflow-hidden">
       {/* Banner Section */}
-      <section className="relative h-[450px] w-full flex items-center justify-center">
+      <section className="relative h-[450px] w-full flex items-center justify-center animate-fadeIn animate-slideUp" data-aos="fade-up">
         <div
           className="absolute inset-0 bg-gradient-to-r from-tealGrey via-[#d4b396] to-primary"
         ></div>
         <img
           src={`${import.meta.env.BASE_URL}assets/images/siteDogs/dogs.png`}
           alt="Adoptable Dogs"
-          className="absolute bottom-0 h-[380px] object-contain z-10"
+          className="absolute bottom-0 h-[380px] object-contain object-bottom z-10"
+          data-aos="zoom-in"
         />
-        <h1 className="relative z-20 text-6xl font-extrabold drop-shadow-md uppercase tracking-widest mb-32">
+        <h1 className="relative z-20 text-6xl font-extrabold drop-shadow-md uppercase tracking-widest mb-32" data-aos="fade-up">
           <span className="text-darkbrown">Adopt</span> <span className="text-white">a Dog</span>
         </h1>
       </section>
 
       <div className="container mx-auto px-4">
       {/* Welcome Section */}
-      <section className="mt-8 mb-12 text-center">
+      <section className="mt-8 mb-12 text-center" data-aos="fade-up">
         <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-6">
           We're so happy that you're thinking of giving a dog their furever home!
           All dogs listed here are healthy and eager to meet their new families.
@@ -68,8 +74,8 @@ const AdoptPage = () => {
 
       {/* Meet & Greets Section */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-        <div className="bg-gray-50 p-6 rounded-lg">
-          <h2 className="text-4xl font-secondary text-[#9c7459] mb-4">Meet & Greets</h2>
+        <div className="bg-gray-50 p-6 rounded-lg" data-aos="fade-up">
+          <h2 className="text-4xl font-secondary text-[#9c7459] mb-4" data-aos="fade-up">Meet & Greets</h2>
           <p className="mb-4">
             Please note meet and greets are by appointment only. Only those selected as potential adopters 
             will be contacted for a phone interview to arrange a meet within 48 hours of their phone interview.
@@ -80,8 +86,8 @@ const AdoptPage = () => {
           </p>
         </div>
         
-        <div className="bg-gray-50 p-6 rounded-lg">
-          <h2 className="text-4xl font-secondary text-[#9c7459] mb-4">Foster</h2>
+        <div className="bg-gray-50 p-6 rounded-lg" data-aos="fade-up">
+          <h2 className="text-4xl font-secondary text-[#9c7459] mb-4" data-aos="fade-up">Foster</h2>
           <p className="mb-4">
             Many of these dogs are available to foster while they wait for their Furever Home! If you are interested 
             in fostering, click <Link to="/foster" className="text-[#9c7459] underline">here</Link>.
@@ -90,33 +96,33 @@ const AdoptPage = () => {
       </section>
 
       {/* Availability Labels */}
-      <section className="mb-12">
-        <h2 className="text-5xl font-secondary text-[#9c7459] mb-6">Availability Labels</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <AvailabilityLabel type="available" />
-          <AvailabilityLabel type="pending" />
+      <section className="mb-12" data-aos="fade-up">
+        <h2 className="text-5xl font-secondary text-[#9c7459] mb-6" data-aos="fade-up">Availability Labels</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up">
+          <AvailabilityLabel type="available" data-aos="zoom-in" />
+          <AvailabilityLabel type="pending" data-aos="zoom-in" />
         </div>
       </section>
 
       {/* Dog Listings */}
-      <section className="mb-12" id="dog-listings">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-6xl font-secondary text-[#9c7459]">Dogs Available for Adoption</h2>
+      <section className="mb-12" id="dog-listings" data-aos="fade-up">
+        <div className="flex justify-between items-center mb-6" data-aos="fade-up">
+          <h2 className="text-6xl font-secondary text-[#9c7459]" data-aos="fade-up">Dogs Available for Adoption</h2>
           <div className="flex space-x-2">
             <button 
-              className={`px-4 py-2 rounded-lg ${filter === 'all' ? 'bg-[#9c7459] text-white' : 'bg-gray-200 text-gray-800'}`}
+              className={`px-4 py-2 rounded-lg ${filter === 'all' ? 'bg-[#9c7459] text-white' : 'bg-gray-200 text-gray-800'} transition duration-200 ease-in-out transform hover:scale-105`}
               onClick={() => setFilter('all')}
             >
               All Dogs
             </button>
             <button 
-              className={`px-4 py-2 rounded-lg ${filter === 'available' ? 'bg-[#9c7459] text-white' : 'bg-gray-200 text-gray-800'}`}
+              className={`px-4 py-2 rounded-lg ${filter === 'available' ? 'bg-[#9c7459] text-white' : 'bg-gray-200 text-gray-800'} transition duration-200 ease-in-out transform hover:scale-105`}
               onClick={() => setFilter('available')}
             >
               Available
             </button>
             <button 
-              className={`px-4 py-2 rounded-lg ${filter === 'pending' ? 'bg-[#9c7459] text-white' : 'bg-gray-200 text-gray-800'}`}
+              className={`px-4 py-2 rounded-lg ${filter === 'pending' ? 'bg-[#9c7459] text-white' : 'bg-gray-200 text-gray-800'} transition duration-200 ease-in-out transform hover:scale-105`}
               onClick={() => setFilter('pending')}
             >
               Application Pending
@@ -124,45 +130,50 @@ const AdoptPage = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up">
           {filteredDogs.length > 0 ? (
-            filteredDogs.map(dog => (
-              <DogCard
+            filteredDogs.map((dog, index) => (
+              <div
                 key={dog.id}
-                name={dog.name}
-                images={dog.images}
-                age={dog.age}
-                sex={dog.sex}
-                breed={dog.breed}
-                description={dog.description}
-                availability={dog.availability}
-              />
+                className="transition-transform hover:scale-105 hover:shadow-lg"
+                data-aos={index % 2 === 0 ? 'fade-left' : 'fade-right'}
+              >
+                <DogCard
+                  name={dog.name}
+                  images={dog.images}
+                  age={dog.age}
+                  sex={dog.sex}
+                  breed={dog.breed}
+                  description={dog.description}
+                  availability={dog.availability}
+                />
+              </div>
             ))
           ) : (
-            <div className="col-span-3 text-center py-10">
+            <div className="col-span-3 text-center py-10" data-aos="fade-up">
               <p className="text-xl text-gray-600">No dogs currently match your filter. Please check back soon!</p>
             </div>
           )}
         </div>
 
-        <div className="text-center mt-8">
+        <div className="text-center mt-8" data-aos="fade-up">
           <p className="text-gray-600 mb-4">Check back soon for frequent updates!</p>
-          <a href="#adoption-process" className="bg-[#9c7459] hover:bg-[#7d5c46] text-white py-2 px-6 rounded transition inline-block">
+          <a href="#adoption-process" className="bg-[#9c7459] hover:bg-[#7d5c46] text-white py-2 px-6 rounded transition inline-block transition-transform hover:scale-105 shadow-md">
             Ready to Adopt? View Our Process
           </a>
         </div>
       </section>
 
       {/* Adoption Process Section */}
-      <section className="mb-12" id="adoption-process">
-        <h2 className="text-3xl font-bold text-[#9c7459] mb-6">Our Adoption Process</h2>
+      <section className="mb-12" id="adoption-process" data-aos="fade-up">
+        <h2 className="text-3xl font-bold text-[#9c7459] mb-6" data-aos="fade-up">Our Adoption Process</h2>
         <AdoptionProcess />
       </section>
 
       {/* Adoption FAQ */}
-      <section className="mb-12">
-        <h2 className="text-3xl font-bold text-[#9c7459] mb-6">Adoption FAQ</h2>
-        <div className="bg-gray-50 p-6 rounded-lg">
+      <section className="mb-12" data-aos="fade-up">
+        <h2 className="text-3xl font-bold text-[#9c7459] mb-6" data-aos="zoom-in">Adoption FAQ</h2>
+        <div className="bg-gray-50 p-6 rounded-lg" data-aos="fade-up">
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-bold mb-2">What are the adoption fees?</h3>
@@ -206,17 +217,17 @@ const AdoptPage = () => {
       </section>
 
       {/* Application Form Link */}
-      <section className="text-center mb-12" id="application-form">
-        <h2 className="text-3xl font-bold text-[#9c7459] mb-4">Ready to Start the Adoption Process?</h2>
+      <section className="text-center mb-12" id="application-form" data-aos="fade-up">
+        <h2 className="text-3xl font-bold text-[#9c7459] mb-4" data-aos="fade-up">Ready to Start the Adoption Process?</h2>
         <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-6">
           Take the first step towards bringing home your new best friend.
         </p>
-        <Link to="/application" className="bg-[#9c7459] hover:bg-[#7d5c46] text-white py-3 px-8 rounded-lg text-xl inline-block transition">
+        <Link to="/application" className="bg-[#9c7459] hover:bg-[#7d5c46] text-white py-3 px-8 rounded-lg text-xl inline-block transition-transform hover:scale-105 shadow-md">
           Fill Out Adoption Application
         </Link>
       </section>
       </div>
-    </>
+    </div>
   );
 };
 

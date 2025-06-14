@@ -16,7 +16,7 @@ const HappyTailsPage = () => {
     fetchHappyTails();
   }, []);
   return (
-    <div className="mt-24">
+    <div>
       {/* Banner Section */}
       <section className="relative w-full bg-gradient-to-r from-tealGrey to-primary py-2 px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-24">
