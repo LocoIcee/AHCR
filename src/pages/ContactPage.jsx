@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MorePage = () => {
+const ContactPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <section className="mb-12 text-center">
@@ -146,4 +146,4 @@ const MorePage = () => {
   );
 };
 
-export default MorePage;
+export default ContactPage;

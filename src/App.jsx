@@ -5,7 +5,7 @@ import AdoptPage from './pages/AdoptPage';
 import FosterPage from './pages/FosterPage';
 import GetInvolvedPage from './pages/GetInvolvedPage';
 import FundraisersPage from './pages/FundraisersPage';
-import MorePage from './pages/MorePage';
+import ContactPage from './pages/ContactPage';
 import HappyTailsPage from './pages/HappyTailsPage';
 import AdminPage from './pages/AdminPage';
 import LoginPage from './pages/LoginPage';
@@ -16,14 +16,14 @@ function App() {
     <Router basename="/AHCanineRescue/">
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex-grow pt-24">
+        <main className="flex-grow">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/adopt" element={<AdoptPage />} />
             <Route path="/foster" element={<FosterPage />} />
             <Route path="/get-involved" element={<GetInvolvedPage />} />
             <Route path="/fundraisers" element={<FundraisersPage />} />
-            <Route path="/more" element={<MorePage />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/happytails" element={<HappyTailsPage />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/login" element={<LoginPage />} />

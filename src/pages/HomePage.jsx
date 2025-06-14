@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const HomePage = () => {
   return (
     <div>
-      <section className="pb-12 mx-auto">
+      <section className="pt-24 pb-12 mx-auto">
         <div className="container mx-auto px-4">
           <img 
             src={`${import.meta.env.BASE_URL}assets/images/ahcr.png`} 
