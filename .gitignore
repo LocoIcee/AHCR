@@ -20,5 +20,6 @@ dist-ssr
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
+*.son
 *.sw?
+.next/
