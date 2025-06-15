@@ -1,4 +1,13 @@
+// Enable client-side rendering and import AOS
+'use client';
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 export default function Home() { 
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
   return (
     <div>
       <section className="pt-24 pb-12 mx-auto">
@@ -57,7 +66,7 @@ export default function Home() {
             data-aos="zoom-in"
             data-aos-duration="1000"
             style={{
-              backgroundImage: "images/siteDogs/whyAdopt.jpg)",
+              backgroundImage: "url('/images/siteDogs/whyAdopt.jpg')",
               backgroundPosition: 'center 30%',
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',
