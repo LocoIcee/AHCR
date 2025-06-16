@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <Router basename="/AHCanineRescue/">
+    <Router basename="/AHCR/">
       <div className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-grow">
