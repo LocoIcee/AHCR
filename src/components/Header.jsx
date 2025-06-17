@@ -57,7 +57,7 @@ const Header = () => {
             <Link href="/" className="text-lg font-medium hover:text-gray-200 transition-colors">Home</Link>
             <Link href="/adopt" className="text-lg font-medium hover:text-gray-200 transition-colors">Adopt</Link>
             <Link href="/foster" className="text-lg font-medium hover:text-gray-200 transition-colors">Foster</Link>
-            <Link href="/get-involved" className="text-lg font-medium hover:text-gray-200 transition-colors">Get Involved</Link>
+            <Link href="/getinvolved" className="text-lg font-medium hover:text-gray-200 transition-colors">Get Involved</Link>
 {/*            <Link href="/fundraisers" className="text-lg font-medium hover:text-gray-200 transition-colors">Fundraisers</Link> */}
             <Link href="/contact" className="text-lg font-medium hover:text-gray-200 transition-colors">Contact Us</Link> 
             <Link href="/happytails" className="text-lg font-medium hover:text-gray-200 transition-colors">Happy Tails</Link>
@@ -67,7 +67,7 @@ const Header = () => {
         {/* Right side - Donate button and social */}
         <div className="hidden md:flex items-center space-x-4">
           <Link 
-            href="/donate" 
+            href="/getinvolved" 
             className="border border-white px-5 py-1 text-white font-medium hover:bg-white hover:text-[#9c7459] transition-colors"
           >
             DONATE
@@ -95,7 +95,7 @@ const Header = () => {
               
               <div className="pt-2 pb-3 flex flex-col space-y-3">
                 <Link 
-                  href="/donate" 
+                  href="/getinvolved" 
                   className="border border-white px-5 py-1 text-center text-white font-medium hover:bg-white hover:text-[#9c7459] transition-colors w-full"
                   onClick={toggleMenu}
                 >

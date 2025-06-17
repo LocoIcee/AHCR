@@ -55,7 +55,7 @@ const FosterPage = () => {
                 you!
               </p>
               <a 
-                href="#application" 
+                href="https://docs.google.com/forms/d/1TQpf2BB9DqZPlAiTbcoBRBLZLIuleTdOPVeuA2KgpkQ/viewform?edit_requested=true" 
                 className="inline-block border border-darkbrown hover:bg-darkbrown hover:text-white text-darkbrown font-medium py-2 px-5 transition-colors duration-300 uppercase text-sm tracking-wider"
               >
                 CLICK HERE TO FILL OUT A FOSTER APPLICATION

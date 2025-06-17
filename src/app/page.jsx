@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Link from 'next/link';
 
 export default function Home() { 
   useEffect(() => {
@@ -97,10 +98,15 @@ export default function Home() {
                 When you adopt, you give a homeless dog a family—and they give you their whole world in return.
               </li>
             </ul>
-            
-              <button className="mt-10 px-16 py-3 border-2 border-darkbrown text-white bg-darkbrown rounded hover:bg-transparent hover:text-darkbrown transition duration-300 transform hover:scale-105 hover:shadow-md block mx-auto">
-                Adopt Today
+            <div className="flex justify-center mt-10">
+              <button>
+                <Link
+                  href="/adopt"
+                  className="px-16 py-3 border-2 border-darkbrown text-white bg-darkbrown rounded hover:bg-transparent hover:text-darkbrown transition duration-300 transform hover:scale-105 hover:shadow-md">
+                    Adopt Today
+                </Link>
               </button>
+            </div>
             
           </div>
         </div>
