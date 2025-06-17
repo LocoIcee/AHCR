@@ -89,10 +89,11 @@ const Header = () => {
               <Link href="/" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Home</Link>
               <Link href="/adopt" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Adopt</Link>
               <Link href="/foster" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Foster</Link>
-              <Link href="/get-involved" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Get Involved</Link>
-              <Link href="/fundraisers" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Fundraisers</Link>
-              <Link href="/more" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>More</Link>
-              
+             <Link href="/get-involved" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Get Involved</Link> 
+{/*}               <Link href="/fundraisers" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Fundraisers</Link> */}
+              <Link href="/contact" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Contact Us</Link>
+              <Link href="/happytails" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Happy Tails</Link>
+
               <div className="pt-2 pb-3 flex flex-col space-y-3">
                 <Link 
                   href="/getinvolved" 
