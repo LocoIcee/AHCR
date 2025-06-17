@@ -30,7 +30,10 @@ export default function GetInvolvedPage() {
           Donations are crucial to letting us keep doing what we do, and we are thankful for every one of them.
         </p>
         <p className="text-md text-bold">
-          To contribute, send an e-transfer to <a className="underline text-tealGrey" href="mailto:almosthomecaninerescue@gmail.com">almosthomecaninerescue@gmail.com</a>. To donate in person, come by the rescue.
+          To contribute, send an e-transfer to <a className="underline text-tealGrey" href="mailto:almosthomecaninerescue@gmail.com">almosthomecaninerescue@gmail.com</a>
+        </p>
+        <p className="text-md text-bold">
+          Charity #767534902RR0001
         </p>
         <Link href="" className="inline-block bg-primary text-white py-3 px-6 rounded-md hover:bg-darkbrown transition">
           Wish List

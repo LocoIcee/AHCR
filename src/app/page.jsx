@@ -125,7 +125,6 @@ export default function Home() {
           <div className="text-center max-w-lg px-4" data-aos="fade-left" data-aos-duration="1000">
             <h2 className="text-5xl font-extrabold text-darkbrown mb-10 font-secondary">Our Foster Program</h2>
             <ul className="list-disc pl-6 text-gray-700 text-left space-y-4 text-lg font-medium" >
-              <li>Our fosters can attend training sessions with our trainer to set them up for success.</li>
               <li>The easiest way to adopt is to foster. We give first selection to our fosters (once they undergo a vetting process).</li>
               <li>We provide all things needed (food, medication) for each dog while fostering.</li>
               <li>More details, as well as available dogs, can be found in our Foster Section.</li>
