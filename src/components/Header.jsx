@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { FacebookIcon, InstagramIcon } from '../assets/icons';
 import { Logo } from '../assets/logo';
 import PawPrint from '../assets/PawPrint';
+import Construction from "@/components/Construction";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,6 +31,7 @@ const Header = () => {
 
   return (
     <header className={`bg-gradient-to-t from-[#9c7459] to-[#cdb7a3] text-white transition-transform duration-300 fixed w-full z-50 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
+      <Construction />
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
