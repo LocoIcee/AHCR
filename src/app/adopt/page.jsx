@@ -276,7 +276,7 @@ const AdoptPage = () => {
               <h3 className="text-xl font-bold mb-2">What if the adoption doesn't work out?</h3>
               <p className="text-gray-700">
                 We understand that sometimes, despite best intentions, an adoption may not work out. 
-                We always take our dogs back if needed and will work with you to find a solution.
+                We will take our dogs back dependant on space availability and work with you to find a solution
               </p>
             </div>
           </div>

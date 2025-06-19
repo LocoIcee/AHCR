@@ -35,7 +35,7 @@ export default function GetInvolvedPage() {
         <p className="text-md text-bold">
           Charity #767534902RR0001
         </p>
-        <Link href="" className="inline-block bg-primary text-white py-3 px-6 rounded-md hover:bg-darkbrown transition">
+        <Link href="https://www.amazon.ca/hz/wishlist/ls/17JK99S32HLAZ?ref_=list_d_wl_ys_list_1&fbclid=IwQ0xDSwLBUoBleHRuA2FlbQIxMQABHuzkcqqhm30GE2aPDmsPT6Z2inzWUx9Rdv-EYVi8lcogCu9BMqAQGWcI4Hdc_aem__H1XpfpsvsBUg2J-cM_25g" className="inline-block bg-primary text-white py-3 px-6 rounded-md hover:bg-darkbrown transition">
           Wish List
         </Link>
       </section>

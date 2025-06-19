@@ -48,7 +48,7 @@ export default function Home() {
                   AHCR places dogs in loving, responsible, and committed permanent homes. We take considerable care in finding good matches and educating prospective adopters about the responsibilities and costs of bringing a dog into their homes and lives.
                 </p>
                 <p>
-                  We are a non profit rescue that relies on the time and generosity of our donors. Contributions of all kinds are pivotal to keeping our operations going. All donations are gratefully accepted.
+                  We are a  rescue that relies on the generosity of our donors. Contributions of all kinds are pivotal to keeping our operations going. All donations are gratefully accepted.
                 </p>
                 <p>
                   Learn more about how you can help a dog-in-need find their new forever home!

@@ -74,17 +74,16 @@ const ContactPage = () => {
             <h2 className="text-3xl font-bold text-[#9c7459] mb-6">Contact Us</h2>
             <div className="mb-6">
               <h3 className="text-xl font-bold mb-3 text-[#9c7459]">Main Office</h3>
-              <p className="text-beige">123 Rescue Lane</p>
-              <p className="text-beige">Anytown, USA 12345</p>
-              <p className="text-beige mt-2">Phone: (555) 123-4567</p>
+              <p className="text-beige">Box 2737</p>
+              <p className="text-beige">Lac La Biche Alberta T2A 2C0</p>
+              <p className="text-beige mt-2">Phone: (587) 574-4939</p>
               <p className="text-beige">Email: almosthomecaninerescue@gmail.com</p>
             </div>
             
             <div className="mb-6">
               <h3 className="text-xl font-bold mb-3 text-[#9c7459]">Hours of Operation</h3>
-              <p className="text-beige">Monday - Friday: 10:00 AM - 6:00 PM</p>
-              <p className="text-beige">Saturday: 10:00 AM - 4:00 PM</p>
-              <p className="text-beige">Sunday: Closed (By appointment only)</p>
+              <p className="text-beige">Tuesday - Saturday: 10:00 AM - 4:00 PM</p>
+              <p className="text-beige">Sunday & Monday closed</p>
             </div>
 
             <div className="mt-6">
