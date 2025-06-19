@@ -219,7 +219,7 @@ const AdoptPage = () => {
                 </div>
                 <div className="mt-auto">
                   <a 
-                    href="/application" 
+                    href="https://docs.google.com/forms/d/e/1FAIpQLScZHJt4o1tNLyqIlNY9WjbYo779Co2fE0K3TLQ4f_wUyaRJYg/viewform" 
                     className="bg-gray-700 hover:bg-[#4e7471] text-white py-3 px-4 rounded w-full block text-center font-medium transition-all"
                   >
                     Apply to Adopt {selectedDog.name}
@@ -289,7 +289,7 @@ const AdoptPage = () => {
         <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-6">
           Take the first step towards bringing home your new best friend.
         </p>
-        <Link href="/application" className="bg-[#9c7459] hover:bg-[#7d5c46] text-white py-3 px-8 rounded-lg text-xl inline-block transition-transform hover:scale-105 shadow-md">
+        <Link href="https://docs.google.com/forms/d/e/1FAIpQLScZHJt4o1tNLyqIlNY9WjbYo779Co2fE0K3TLQ4f_wUyaRJYg/viewform" className="bg-[#9c7459] hover:bg-[#7d5c46] text-white py-3 px-8 rounded-lg text-xl inline-block transition-transform hover:scale-105 shadow-md">
           Fill Out Adoption Application
         </Link>
       </section>
