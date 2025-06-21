@@ -117,12 +117,20 @@ const AdminPage = () => {
     }, 3000);
   };
 
+  const MAX_FILE_SIZE_MB = 5;
+
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files || []);
     const imageFiles = files.filter(file => file.type.startsWith('image/'));
 
     if (imageFiles.length === 0) {
       showNotification('Please select valid image files', 'error');
+      return;
+    }
+
+    const oversized = imageFiles.find(file => file.size > MAX_FILE_SIZE_MB * 1024 * 1024);
+    if (oversized) {
+      showNotification(`Each image must be under ${MAX_FILE_SIZE_MB}MB`, 'error');
       return;
     }
 
@@ -331,7 +339,7 @@ const AdminPage = () => {
 
       {confirmation.show && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center"
+          className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-white/30"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               setConfirmation({ show: false, id: null });
@@ -372,7 +380,7 @@ const AdminPage = () => {
       {/* Modal for Add/Edit Dog */}
       {showFormModal && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-white/30"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               setShowFormModal(false);
@@ -393,6 +401,24 @@ const AdminPage = () => {
             <h1 className="text-2xl font-bold text-center mb-4 text-[#7d5c46]">
               {isEditing ? 'Edit Dog' : 'Add New Dog'}
             </h1>
+            {notification.show && (
+              <div className={`p-4 mb-4 rounded-md flex items-center justify-between ${notification.type === 'error' ? 'bg-red-100 text-red-700 border border-red-300' : 'bg-green-100 text-green-700 border border-green-300'}`}>
+                <div className="flex items-center space-x-2">
+                  <span>
+                    {notification.type === 'error' ? (
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    ) : (
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    )}
+                  </span>
+                  <span>{notification.message}</span>
+                </div>
+              </div>
+            )}
             <form onSubmit={handleSubmit} className="space-y-4 bg-gray-50 p-6 rounded-lg">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -413,9 +439,10 @@ const AdminPage = () => {
                   <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-1">Age</label>
                   <input
                     id="age"
-                    type="text"
+                    type="number"
                     name="age"
-                    placeholder="Dog's age (e.g., 2 years)"
+                    placeholder="Dog's age (in years)"
+                    min="0"
                     onChange={handleChange}
                     value={dogData.age}
                     className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
@@ -553,6 +580,7 @@ const AdminPage = () => {
                   rows="4"
                   onChange={handleChange}
                   value={dogData.description}
+                  maxLength={1000}
                   className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
                   required
                 ></textarea>
@@ -645,7 +673,7 @@ const AdminPage = () => {
 
       {adoptConfirmation.show && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center"
+          className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-white/30"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               setAdoptConfirmation({ show: false, id: null });
