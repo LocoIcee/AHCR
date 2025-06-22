@@ -207,7 +207,13 @@ const AdoptPage = () => {
                   <h3 className="font-bold text-2xl md:text-3xl mb-2 text-[#9c7459]">{selectedDog.name}</h3>
                   <p className="text-gray-600 mb-2 flex items-center">
                     <span className="inline-block mr-2 w-2 h-2 rounded-full bg-gray-400"></span>
-                    {selectedDog.age} • {selectedDog.sex} • {selectedDog.breed}
+                    {selectedDog.age?.weeks || selectedDog.age?.months || selectedDog.age?.years ? (
+                      <>
+                        {selectedDog.age.weeks > 0 && `${selectedDog.age.weeks}w `}
+                        {selectedDog.age.months > 0 && `${selectedDog.age.months}m `}
+                        {selectedDog.age.years > 0 && `${selectedDog.age.years}y `}
+                      </>
+                    ) : 'Age unknown'} • {selectedDog.sex} • {selectedDog.breed}
                   </p>
                   <div className={`inline-block py-1 px-3 rounded-full text-sm font-semibold mb-4
                     ${selectedDog.availability === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'}`}>

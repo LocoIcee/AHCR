@@ -8,7 +8,7 @@ const AdminPage = () => {
 
   const initialDogData = {
     name: '',
-    age: '',
+    age: { weeks: 0, months: 0, years: 0 },
     sex: '',
     breed: '',
     description: '',
@@ -436,18 +436,54 @@ const AdminPage = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-1">Age</label>
-                  <input
-                    id="age"
-                    type="number"
-                    name="age"
-                    placeholder="Dog's age (in years)"
-                    min="0"
-                    onChange={handleChange}
-                    value={dogData.age}
-                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
-                    required
-                  />
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Age <span className="text-gray-500 text-sm">(weeks / months / years)</span></label>
+                  <div className="flex space-x-2">
+                    <input
+                      type="number"
+                      name="weeks"
+                      min="0"
+                      placeholder="Weeks"
+                      value={dogData.age.weeks}
+                      onChange={(e) =>
+                        setDogData({
+                          ...dogData,
+                          age: { ...dogData.age, weeks: parseInt(e.target.value) || 0 },
+                        })
+                      }
+                      className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
+                      required
+                    />
+                    <input
+                      type="number"
+                      name="months"
+                      min="0"
+                      placeholder="Months"
+                      value={dogData.age.months}
+                      onChange={(e) =>
+                        setDogData({
+                          ...dogData,
+                          age: { ...dogData.age, months: parseInt(e.target.value) || 0 },
+                        })
+                      }
+                      className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
+                      required
+                    />
+                    <input
+                      type="number"
+                      name="years"
+                      min="0"
+                      placeholder="Years"
+                      value={dogData.age.years}
+                      onChange={(e) =>
+                        setDogData({
+                          ...dogData,
+                          age: { ...dogData.age, years: parseInt(e.target.value) || 0 },
+                        })
+                      }
+                      className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
+                      required
+                    />
+                  </div>
                 </div>
 
                 <div>
@@ -636,7 +672,15 @@ const AdminPage = () => {
                       {dog.availability === 'pending' ? 'Application Pending' : 'Available'}
                     </span>
                   </div>
-                  <p className="text-gray-600 mb-2">{dog.age} • {dog.sex} • {dog.breed}</p>
+                  <p className="text-gray-600 mb-2">
+                    {dog.age?.weeks || dog.age?.months || dog.age?.years ? (
+                      <>
+                        {dog.age.weeks > 0 && `${dog.age.weeks} weeks `}
+                        {dog.age.months > 0 && `${dog.age.months} months `}
+                        {dog.age.years > 0 && `${dog.age.years} years `}
+                      </>
+                    ) : 'Age unknown'} • {dog.sex} • {dog.breed}
+                  </p>
                   <p className="text-gray-700 mb-4 line-clamp-3">
                     {dog.description}
                   </p>
