@@ -21,6 +21,7 @@ const StripeForm = ({
   const stripe = useStripe();
   const elements = useElements();
   const [paymentElementReady, setPaymentElementReady] = useState(false);
+  const [email, setEmail] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +43,9 @@ const StripeForm = ({
     try {
       const result = await stripe.confirmPayment({
         elements,
+        confirmParams: {
+          receipt_email: email,
+        },
         redirect: 'if_required',
       });
 
@@ -95,6 +99,20 @@ const StripeForm = ({
                 className="w-full px-2 py-2 outline-none"
               />
             </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Email for Receipt:
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              name="email"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md outline-none"
+            />
           </div>
 
           <PaymentElement onReady={() => setPaymentElementReady(true)} />
