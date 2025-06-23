@@ -5,10 +5,12 @@ import { FacebookIcon, InstagramIcon } from '../assets/icons';
 import { Logo } from '../assets/logo';
 import PawPrint from '../assets/PawPrint';
 import Construction from "@/components/Construction";
+import Payments from './Payments';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
+  const [showPayments, setShowPayments] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -68,12 +70,12 @@ const Header = () => {
 
         {/* Right side - Donate button and social */}
         <div className="hidden md:flex items-center space-x-4">
-          <Link 
-            href="/getinvolved" 
+          <button
+            onClick={() => setShowPayments(true)}
             className="border border-white px-5 py-1 text-white font-medium hover:bg-white hover:text-[#9c7459] transition-colors"
           >
             DONATE
-          </Link>
+          </button>
           <div className="flex items-center space-x-3">
             <a href="https://facebook.com/AHCRYYC" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <FacebookIcon className="h-6 w-6 text-white hover:text-gray-200 transition-colors" />
@@ -97,13 +99,15 @@ const Header = () => {
               <Link href="/happytails" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Happy Tails</Link>
 
               <div className="pt-2 pb-3 flex flex-col space-y-3">
-                <Link 
-                  href="/getinvolved" 
+                <button
+                  onClick={() => {
+                    toggleMenu();
+                    setShowPayments(true);
+                  }}
                   className="border border-white px-5 py-1 text-center text-white font-medium hover:bg-white hover:text-[#9c7459] transition-colors w-full"
-                  onClick={toggleMenu}
                 >
                   DONATE
-                </Link>
+                </button>
                 <div className="flex justify-center space-x-4 pt-2">
                   <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                     <FacebookIcon className="h-6 w-6 text-white hover:text-gray-200 transition-colors" />
@@ -117,6 +121,7 @@ const Header = () => {
           </div>
         )}
       </div>
+      <Payments isOpen={showPayments} onClose={() => setShowPayments(false)} />
     </header>
   );
 };
