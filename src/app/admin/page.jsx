@@ -63,7 +63,7 @@ const AdminPage = () => {
       sex: dog.sex,
       breed: dog.breed,
       description: dog.description,
-      image: dog.image,
+      images: dog.images,
       "created at": new Date().toISOString(),
     });
 
@@ -117,25 +117,53 @@ const AdminPage = () => {
     }, 3000);
   };
 
-  const MAX_FILE_SIZE_MB = 5;
+  const MAX_FILE_SIZE_MB = 7;
 
-  const handleFileChange = (e) => {
+  // Helper function to generate a video thumbnail as a Data URL
+  const generateVideoThumbnail = (videoFile) => {
+    return new Promise((resolve) => {
+      const video = document.createElement('video');
+      video.src = URL.createObjectURL(videoFile);
+      video.crossOrigin = 'anonymous';
+      video.muted = true;
+      video.currentTime = 1;
+      video.addEventListener('loadeddata', () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 160;
+        canvas.height = 90;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const thumbnailUrl = canvas.toDataURL('image/jpeg');
+        resolve(thumbnailUrl);
+      });
+    });
+  };
+
+  const handleFileChange = async (e) => {
     const files = Array.from(e.target.files || []);
-    const imageFiles = files.filter(file => file.type.startsWith('image/'));
+    const allowedTypes = ['image/', 'video/'];
+    const mediaFiles = files.filter(file => allowedTypes.some(type => file.type.startsWith(type)));
 
-    if (imageFiles.length === 0) {
-      showNotification('Please select valid image files', 'error');
+    if (mediaFiles.length === 0) {
+      showNotification('Please select valid image or video files', 'error');
       return;
     }
 
-    const oversized = imageFiles.find(file => file.size > MAX_FILE_SIZE_MB * 1024 * 1024);
+    const oversized = mediaFiles.find(file => file.size > MAX_FILE_SIZE_MB * 1024 * 1024);
     if (oversized) {
       showNotification(`Each image must be under ${MAX_FILE_SIZE_MB}MB`, 'error');
       return;
     }
 
-    let newSelectedFiles = [...selectedFile, ...imageFiles];
-    let newPreviews = [...previewUrl, ...imageFiles.map(file => URL.createObjectURL(file))];
+    let newSelectedFiles = [...selectedFile, ...mediaFiles];
+    // Generate previews, using thumbnails for videos
+    const thumbnailPromises = mediaFiles.map(async (file) => {
+      if (file.type.startsWith('video/')) {
+        return await generateVideoThumbnail(file);
+      }
+      return URL.createObjectURL(file);
+    });
+    const newPreviews = [...previewUrl, ...(await Promise.all(thumbnailPromises))];
 
     setSelectedFile(newSelectedFiles);
     setPreviewUrl(newPreviews);
@@ -508,11 +536,19 @@ const AdminPage = () => {
                       <div className="flex overflow-x-auto gap-4 mb-4 py-2 px-1 max-w-full">
                         {previewUrl.map((url, index) => (
                           <div key={index} className="relative group flex-shrink-0 w-32 h-32">
-                            <img
-                              src={url}
-                              alt={`Preview ${index}`}
-                              className="w-full h-full object-cover rounded-md border border-gray-200"
-                            />
+                            {url.match(/\.(mp4|webm|ogg)$/i) ? (
+                              <video
+                                src={url}
+                                controls
+                                className="w-full h-full object-cover rounded-md border border-gray-200"
+                              />
+                            ) : (
+                              <img
+                                src={url}
+                                alt={`Preview ${index}`}
+                                className="w-full h-full object-cover rounded-md border border-gray-200"
+                              />
+                            )}
                             <button
                               type="button"
                               onClick={() => removeImage(index)}
@@ -532,7 +568,7 @@ const AdminPage = () => {
                         ref={fileInputRef}
                         id="image-upload"
                         type="file"
-                        accept="image/*"
+                        accept="image/*,video/*"
                         multiple
                         onChange={handleFileChange}
                         className="hidden"
@@ -657,12 +693,26 @@ const AdminPage = () => {
         {dogs.map((dog) => (
           <div key={dog.id} className="w-full">
             <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md flex flex-col w-[300px] h-[520px]">
-              {/* Show last image if available, fallback to empty string */}
-              <img
-                src={dog.images && dog.images.length > 0 ? dog.images[dog.images.length - 1] : ''}
-                alt={`${dog.name} - ${dog.breed}`}
-                className="w-full h-64 object-cover"
-              />
+              {/* Show last image or video if available, fallback to "No media" */}
+              {(dog.images && dog.images.length > 0) ? (
+                dog.images[dog.images.length - 1].match(/\.(mp4|webm|ogg)$/i) ? (
+                  <video
+                    src={dog.images[dog.images.length - 1]}
+                    controls
+                    className="w-full h-64 object-cover"
+                  />
+                ) : (
+                  <img
+                    src={dog.images[dog.images.length - 1]}
+                    alt={`${dog.name} - ${dog.breed}`}
+                    className="w-full h-64 object-cover"
+                  />
+                )
+              ) : (
+                <div className="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
+                  No media
+                </div>
+              )}
               <div className="p-4 flex flex-col flex-1">
                 <div className="flex-1">
                   <div className="flex justify-between items-start">

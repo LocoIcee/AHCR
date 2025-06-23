@@ -91,19 +91,31 @@ const ImageCarousel = ({ images, onClose }) => {
         onTouchEnd={handleTouchEnd}
       >
         <div className="h-full w-full bg-gray-100">
-          <img
-            src={images[currentIndex]}
-            alt={`Image ${currentIndex + 1}`}
-            className="w-full h-full object-cover"
-            style={{
-              transition: "opacity 0.3s ease",
-              opacity: isAnimating ? 0.7 : 1
-            }}
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = `${import.meta.env.BASE_URL}assets/images/placeholder.png`;
-            }}
-          />
+          {/\.(mp4|webm|ogg)$/i.test(images[currentIndex]) ? (
+            <video
+              src={images[currentIndex]}
+              controls
+              className="w-full h-full object-cover"
+              style={{
+                transition: "opacity 0.3s ease",
+                opacity: isAnimating ? 0.7 : 1
+              }}
+            />
+          ) : (
+            <img
+              src={images[currentIndex]}
+              alt={`Image ${currentIndex + 1}`}
+              className="w-full h-full object-cover"
+              style={{
+                transition: "opacity 0.3s ease",
+                opacity: isAnimating ? 0.7 : 1
+              }}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = `${import.meta.env.BASE_URL}assets/images/placeholder.png`;
+              }}
+            />
+          )}
         </div>
 
         {/* Navigation buttons */}

@@ -43,11 +43,21 @@ const HappyTailsPage = () => {
           {happyTails.map((dog) => (
             <div key={dog.id} className="bg-white shadow-md rounded-md overflow-hidden relative">
               <div className="relative">
-                <img
-                  src={dog.images}
-                  alt={dog.name}
-                  className="w-full h-64 object-cover"
-                />
+                {/\.(mp4|webm|ogg)$/i.test(dog.images) ? (
+                  <video
+                    src={dog.images}
+                    controls
+                    className="w-full h-64 object-cover"
+                    preload="metadata"
+                    poster={dog.images + '#t=1'}
+                  />
+                ) : (
+                  <img
+                    src={dog.images}
+                    alt={dog.name}
+                    className="w-full h-64 object-cover"
+                  />
+                )}
                 <div className="absolute top-2 left-2 bg-darkbrown text-beige text-xs font-bold px-4 py-2 rounded">
                   ADOPTED
                 </div>
