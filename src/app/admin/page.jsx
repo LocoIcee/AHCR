@@ -477,7 +477,7 @@ const AdminPage = () => {
             }
           }}
         >
-          <div className="bg-white rounded-lg shadow-lg w-full max-w-5xl p-6 relative">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-5xl p-6 relative overflow-y-auto">
             <button
               className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
               onClick={() => {
