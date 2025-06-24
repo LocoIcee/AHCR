@@ -41,9 +41,9 @@ const DogCard = ({
           <h3 className="font-bold text-xl mb-1">{name}</h3>
           <p className="text-gray-600 mb-3">
             {[
-              age.years > 0 && `${age.years}y`,
-              age.months > 0 && `${age.months}m`,
-              age.weeks > 0 && `${age.weeks}w`
+              age.years > 0 && `${age.years} years`,
+              age.months > 0 && `${age.months} months`,
+              age.weeks > 0 && `${age.weeks} weeks`
             ].filter(Boolean).join(' ')} • {sex} • {breed}
           </p>
           <p className="text-gray-700 mb-4 line-clamp-3">
