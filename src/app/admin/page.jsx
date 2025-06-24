@@ -3,6 +3,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { useRouter } from 'next/navigation';
 
+const Spinner = () => (
+  <svg className="animate-spin h-5 w-5 text-white mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+  </svg>
+);
+
 const AdminPage = () => {
   const router = useRouter();
 
@@ -53,36 +60,45 @@ const AdminPage = () => {
   const confirmAdopt = async () => {
     const id = adoptConfirmation.id;
     setAdoptConfirmation({ show: false, id: null });
+    setLoading(true);
+    try {
+      const dog = dogs.find((d) => d.id === id);
+      if (!dog) {
+        setLoading(false);
+        return;
+      }
 
-    const dog = dogs.find((d) => d.id === id);
-    if (!dog) return;
+      const { error: insertError } = await supabase.from('Happy Tails').insert({
+        name: dog.name,
+        age: dog.age,
+        sex: dog.sex,
+        breed: dog.breed,
+        description: dog.description,
+        images: dog.images,
+        "created at": new Date().toISOString(),
+      });
 
-    const { error: insertError } = await supabase.from('Happy Tails').insert({
-      name: dog.name,
-      age: dog.age,
-      sex: dog.sex,
-      breed: dog.breed,
-      description: dog.description,
-      images: dog.images,
-      "created at": new Date().toISOString(),
-    });
+      if (insertError) {
+        console.error('Insert error:', insertError);
+        showNotification('Failed to mark as adopted', 'error');
+        setLoading(false);
+        return;
+      }
 
-    if (insertError) {
-      console.error('Insert error:', insertError);
-      showNotification('Failed to mark as adopted', 'error');
-      return;
+      const { error: deleteError } = await supabase.from('Adoptable Dogs').delete().eq('id', id);
+
+      if (deleteError) {
+        console.error('Delete error:', deleteError);
+        showNotification('Failed to remove from Adoptable Dogs', 'error');
+        setLoading(false);
+        return;
+      }
+
+      showNotification('Dog marked as adopted!');
+      fetchDogs();
+    } finally {
+      setLoading(false);
     }
-
-    const { error: deleteError } = await supabase.from('Adoptable Dogs').delete().eq('id', id);
-
-    if (deleteError) {
-      console.error('Delete error:', deleteError);
-      showNotification('Failed to remove from Adoptable Dogs', 'error');
-      return;
-    }
-
-    showNotification('Dog marked as adopted!');
-    fetchDogs();
   };
   const fileInputRef = useRef(null);
 
@@ -221,7 +237,7 @@ const AdminPage = () => {
   // New handleSubmit function per instructions (multiple images)
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       let imageUrls = [];
 
@@ -273,7 +289,12 @@ const AdminPage = () => {
       fetchDogs();
     } catch (err) {
       console.error('Error submitting form:', err);
-      showNotification(isEditing ? 'Failed to update dog' : 'Failed to add dog', 'error');
+      showNotification(
+        (isEditing ? 'Failed to update dog' : 'Failed to add dog') + ': ' + (err.message || 'Unknown error'),
+        'error'
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -307,18 +328,56 @@ const AdminPage = () => {
     const id = confirmation.id;
     setConfirmation({ show: false, id: null });
     setLoading(true);
-    const { error } = await supabase
-      .from('Adoptable Dogs')
-      .delete()
-      .eq('id', id);
-    if (error) {
-      console.error('Delete error:', error);
-      showNotification('Failed to delete dog', 'error');
-    } else {
-      showNotification('Dog deleted successfully!');
-      fetchDogs();
+    try {
+      // Fetch the dog to get image URLs
+      const { data: dogDataToDelete, error: fetchError } = await supabase
+        .from('Adoptable Dogs')
+        .select('images')
+        .eq('id', id)
+        .single();
+
+      if (fetchError) {
+        console.error('Fetch error before delete:', fetchError);
+        showNotification('Failed to fetch dog images before delete', 'error');
+        setLoading(false);
+        return;
+      }
+
+      // Delete associated images from storage if any
+      if (dogDataToDelete?.images && dogDataToDelete.images.length > 0) {
+        const filenames = dogDataToDelete.images
+          .map((url) => {
+            const match = url.match(/adopt\/([^?]+)/);
+            return match ? `adopt/${match[1]}` : null;
+          })
+          .filter(Boolean);
+
+        if (filenames.length > 0) {
+          const { error: removeError } = await supabase.storage
+            .from('dog-images')
+            .remove(filenames);
+
+          if (removeError) {
+            console.error('Storage delete error:', removeError);
+            showNotification('Failed to delete images from storage', 'error');
+          }
+        }
+      }
+
+      const { error } = await supabase
+        .from('Adoptable Dogs')
+        .delete()
+        .eq('id', id);
+      if (error) {
+        console.error('Delete error:', error);
+        showNotification('Failed to delete dog', 'error');
+      } else {
+        showNotification('Dog deleted successfully!');
+        fetchDogs();
+      }
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleCancel = () => {
@@ -386,9 +445,10 @@ const AdminPage = () => {
               </button>
               <button
                 onClick={confirmDelete}
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 flex items-center justify-center"
+                disabled={loading}
               >
-                Yes, Delete
+                {loading ? <Spinner /> : 'Yes, Delete'}
               </button>
             </div>
           </div>
@@ -399,9 +459,10 @@ const AdminPage = () => {
         <h2 className="text-2xl font-bold text-[#7d5c46]">Current Dogs</h2>
         <button
           onClick={() => setShowFormModal(true)}
-          className="bg-[#9c7459] text-white py-2 px-6 rounded-md hover:bg-[#7d5c46] transition-colors"
+          className="bg-[#9c7459] text-white py-2 px-6 rounded-md hover:bg-[#7d5c46] transition-colors flex items-center justify-center"
+          disabled={loading}
         >
-          Add Dog
+          {loading ? <Spinner /> : 'Add Dog'}
         </button>
       </div>
 
@@ -552,7 +613,7 @@ const AdminPage = () => {
                             <button
                               type="button"
                               onClick={() => removeImage(index)}
-                              className="absolute top-1 right-1 text-gray-600 p-1  hover:text-red-600"
+                              className="absolute top-1 right-1 text-gray-600 bg-white/60 rounded-full p-1 w-6 h-6 flex items-center justify-center hover:text-red-600"
                               title="Remove image"
                             >
                               ✕
@@ -661,10 +722,10 @@ const AdminPage = () => {
               <div className="flex space-x-4">
                 <button
                   type="submit"
-                  className="bg-[#9c7459] text-white py-3 px-6 rounded-md hover:bg-[#7d5c46] transition-colors flex-1 disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="bg-[#9c7459] text-white py-3 px-6 rounded-md hover:bg-[#7d5c46] transition-colors flex-1 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
                   disabled={loading}
                 >
-                  {loading ? 'Processing...' : isEditing ? 'Update Dog' : 'Add Dog'}
+                  {loading ? <Spinner /> : (isEditing ? 'Update Dog' : 'Add Dog')}
                 </button>
 
                 {isEditing && (
@@ -744,15 +805,17 @@ const AdminPage = () => {
                   </button>
                   <button
                     onClick={() => handleDelete(dog.id)}
-                    className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md transition-colors"
+                    className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md transition-colors flex items-center justify-center"
+                    disabled={loading}
                   >
-                    Delete
+                    {loading ? <Spinner /> : 'Delete'}
                   </button>
                   <button
                     onClick={() => handleAdoptClick(dog.id)}
-                    className="bg-[#7d5c46] hover:bg-[#5f4735] text-white py-2 px-4 rounded-md transition-colors"
+                    className="bg-[#7d5c46] hover:bg-[#5f4735] text-white py-2 px-4 rounded-md transition-colors flex items-center justify-center"
+                    disabled={loading}
                   >
-                    Adopted
+                    {loading ? <Spinner /> : 'Adopted'}
                   </button>
                 </div>
               </div>
@@ -786,9 +849,10 @@ const AdminPage = () => {
               </button>
               <button
                 onClick={confirmAdopt}
-                className="bg-[#9c7459] text-white px-4 py-2 rounded-md hover:bg-[#7d5c46]"
+                className="bg-[#9c7459] text-white px-4 py-2 rounded-md hover:bg-[#7d5c46] flex items-center justify-center"
+                disabled={loading}
               >
-                Yes, Adopted
+                {loading ? <Spinner /> : 'Yes, Adopted'}
               </button>
             </div>
           </div>
