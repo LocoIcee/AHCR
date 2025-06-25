@@ -127,6 +127,7 @@ const StripeForm = ({
           ) : (
             <p className="text-center text-sm text-gray-500">Loading payment form…</p>
           )}
+          <div id="paypal-button-container" className="my-4" />
 
           {message && message !== "success" && (
             <p className="mt-4 text-center text-sm text-gray-700">{message}</p>
@@ -151,6 +152,7 @@ const Payments = ({ isOpen, onClose }) => {
       if (container) container.innerHTML = '';
 
       window.paypal.Buttons({
+        fundingSource: window.paypal.FUNDING.PAYPAL,
         createOrder: (data, actions) => {
           return actions.order.create({
             purchase_units: [
@@ -241,12 +243,6 @@ const Payments = ({ isOpen, onClose }) => {
                 onClose={onClose}
               />
             </Elements>
-            {isAmountConfirmed && (
-              <>
-                <div className="my-4 text-center text-sm text-gray-500">— or —</div>
-                <div id="paypal-button-container" className="flex justify-center" />
-              </>
-            )}
           </>
         ) : (
           <form className="space-y-4">
