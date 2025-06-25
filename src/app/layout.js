@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
             <Footer />
           </PaymentModalProvider>
         </Providers>
+        <Script src="https://www.paypal.com/sdk/js?client-id=AUd6J6g-t_SidUfE-VzzWYFPfGP3sCgQ3GsY6B_3SytmRX-OawWqQCwDA8f13KIqHeNTafswnIR1vLI8&currency=CAD" strategy="afterInteractive" />
       </body>
     </html>
   )

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CardElement, useStripe, useElements, PaymentElement, Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { createPortal } from 'react-dom';
@@ -144,6 +144,36 @@ const Payments = ({ isOpen, onClose }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [isAmountConfirmed, setIsAmountConfirmed] = useState(false);
 
+  useEffect(() => {
+    if (isOpen && isAmountConfirmed && typeof window !== 'undefined' && window.paypal && amount) {
+      // Clear previous render to avoid duplicate buttons
+      const container = document.getElementById('paypal-button-container');
+      if (container) container.innerHTML = '';
+
+      window.paypal.Buttons({
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [
+              {
+                amount: {
+                  value: parseFloat(amount).toFixed(2),
+                },
+              },
+            ],
+          });
+        },
+        onApprove: async (data, actions) => {
+          await actions.order.capture();
+          setMessage('success');
+        },
+        onError: (err) => {
+          console.error(err);
+          setMessage('PayPal payment failed. Please try again.');
+        },
+      }).render('#paypal-button-container');
+    }
+  }, [isOpen, isAmountConfirmed, amount]);
+
   if (!isOpen) return null;
   if (typeof window === 'undefined') return null;
 
@@ -196,20 +226,28 @@ const Payments = ({ isOpen, onClose }) => {
         <h2 className="text-2xl font-semibold text-center mb-4">Make a Donation</h2>
 
         {clientSecret ? (
-          <Elements stripe={stripePromise} options={{ clientSecret }}>
-            <StripeForm
-              amount={amount}
-              setAmount={setAmount}
-              loading={loading}
-              setLoading={setLoading}
-              message={message}
-              setMessage={setMessage}
-              setClientSecret={setClientSecret}
-              setIsAmountConfirmed={setIsAmountConfirmed}
-              handleConfirmAmount={handleConfirmAmount}
-              onClose={onClose}
-            />
-          </Elements>
+          <>
+            <Elements stripe={stripePromise} options={{ clientSecret }}>
+              <StripeForm
+                amount={amount}
+                setAmount={setAmount}
+                loading={loading}
+                setLoading={setLoading}
+                message={message}
+                setMessage={setMessage}
+                setClientSecret={setClientSecret}
+                setIsAmountConfirmed={setIsAmountConfirmed}
+                handleConfirmAmount={handleConfirmAmount}
+                onClose={onClose}
+              />
+            </Elements>
+            {isAmountConfirmed && (
+              <>
+                <div className="my-4 text-center text-sm text-gray-500">— or —</div>
+                <div id="paypal-button-container" className="flex justify-center" />
+              </>
+            )}
+          </>
         ) : (
           <form className="space-y-4">
             <div>
