@@ -1,14 +1,9 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
+import ImageCarousel from './ImageCarousel';
 
-const FundraiserCard = ({ id, title, description, startDate, endDate, imageSrc, raised, goal }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-
+const FundraiserCard = ({ id, title, description, startDate, endDate, images, raised, goal }) => {
   // Calculate days remaining
   const today = new Date();
   const end = new Date(endDate);
@@ -19,44 +14,49 @@ const FundraiserCard = ({ id, title, description, startDate, endDate, imageSrc, 
 
   // Format dates
   const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    const [year, month, day] = dateString.split('-');
+    const date = new Date(year, month - 1, day);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'America/Edmonton' });
   };
   
-  // Check if fundraiser is active
-  const isActive = today <= end && today >= new Date(startDate);
+  // Check if fundraiser is active (date-only comparison)
+  const todayDateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const [startYear, startMonth, startDay] = startDate.split('-').map(Number);
+  const [endYear, endMonth, endDay] = endDate.split('-').map(Number);
+  const start = new Date(startYear, startMonth - 1, startDay);
+  const endDateOnly = new Date(endYear, endMonth - 1, endDay);
+  const isActive = todayDateOnly >= start && todayDateOnly <= endDateOnly;
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
-      <div className="relative h-56">
-        <Image
-          src={imageSrc}
-          alt={title}
-          fill
-          style={{ objectFit: "cover" }}
-          className="transition-transform duration-300 hover:scale-105"
-        />
-        {isActive ? (
-          <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-            Active
-          </div>
-        ) : today > end ? (
-          <div className="absolute top-4 right-4 bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-            Completed
-          </div>
-        ) : (
-          <div className="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-            Upcoming
-          </div>
-        )}
-      </div>
-      
-      <div className="p-6">
+    <>
+      <div className="bg-white rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl">
+        <div className="relative aspect-[16/9]">
+          <ImageCarousel images={images} />
+          {isActive ? (
+            <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+              Active
+            </div>
+          ) : today > end ? (
+            <div className="absolute top-4 right-4 bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+              Completed
+            </div>
+          ) : (
+            <div className="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+              Upcoming
+            </div>
+          )}
+        </div>
+        
+        <div className="p-6">
         <h3 className="text-2xl font-bold text-[#9c7459] mb-2">{title}</h3>
         
         <div className="flex justify-between text-sm text-gray-600 mb-3">
           <span>{formatDate(startDate)} - {formatDate(endDate)}</span>
           {isActive && <span>{daysRemaining} days left</span>}
+        </div>
+        
+        <div className="mb-4">
+          <p className="text-gray-700">{description}</p>
         </div>
         
         <div className="mb-4">
@@ -71,27 +71,9 @@ const FundraiserCard = ({ id, title, description, startDate, endDate, imageSrc, 
             <span>${goal.toLocaleString()} goal</span>
           </div>
         </div>
-        
-        <div className={`transition-all duration-300 ${isExpanded ? 'max-h-[500px]' : 'max-h-24'} overflow-hidden`}>
-          <p className="text-gray-700">{description}</p>
-        </div>
-        
-        <div className="mt-4 flex justify-between items-center">
-          <button 
-            onClick={toggleExpand}
-            className="text-sm text-[#9c7459] font-medium hover:underline"
-          >
-            {isExpanded ? 'Show less' : 'Read more'}
-          </button>
-          
-          <button 
-            className="bg-[#9c7459] hover:bg-[#86644c] text-white py-2 px-4 rounded transition-colors"
-          >
-            Donate Now
-          </button>
-        </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

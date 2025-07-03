@@ -32,7 +32,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`bg-gradient-to-t from-[#9c7459] to-[#cdb7a3] text-white transition-transform duration-300 fixed w-full z-50 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
+    <header className={`bg-gradient-to-t from-[#9c7459]/95 to-[#cdb7a3] text-white transition-transform duration-300 fixed w-full z-50 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
       <Construction />
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
@@ -62,7 +62,7 @@ const Header = () => {
             <Link href="/adopt" className="text-lg font-medium hover:text-gray-200 transition-colors">Adopt</Link>
             <Link href="/foster" className="text-lg font-medium hover:text-gray-200 transition-colors">Foster</Link>
             <Link href="/getinvolved" className="text-lg font-medium hover:text-gray-200 transition-colors">Get Involved</Link>
-{/*            <Link href="/fundraisers" className="text-lg font-medium hover:text-gray-200 transition-colors">Fundraisers</Link> */}
+            <Link href="/fundraisers" className="text-lg font-medium hover:text-gray-200 transition-colors">Fundraisers</Link>
             <Link href="/contact" className="text-lg font-medium hover:text-gray-200 transition-colors">Contact Us</Link> 
             <Link href="/happytails" className="text-lg font-medium hover:text-gray-200 transition-colors">Happy Tails</Link>
           </div>
@@ -93,8 +93,8 @@ const Header = () => {
               <Link href="/" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Home</Link>
               <Link href="/adopt" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Adopt</Link>
               <Link href="/foster" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Foster</Link>
-             <Link href="/get-involved" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Get Involved</Link> 
-{/*}               <Link href="/fundraisers" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Fundraisers</Link> */}
+              <Link href="/get-involved" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Get Involved</Link> 
+              <Link href="/fundraisers" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Fundraisers</Link>
               <Link href="/contact" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Contact Us</Link>
               <Link href="/happytails" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Happy Tails</Link>
 

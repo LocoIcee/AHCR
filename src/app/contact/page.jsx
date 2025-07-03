@@ -67,11 +67,14 @@ const ContactPage = () => {
 
   return (
     <div className="container pt-32 mx-auto px-4 py-8">      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 items-stretch items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 items-stretch items-start transition-all duration-700 ease-in-out">
         {/* Contact Info Section */}
-        <section className="flex flex-col h-full">
+        <section className="flex flex-col h-full transition-transform duration-700 hover:scale-[1.02]">
           <div className="bg-gray-700 shadow-md rounded-lg p-6 h-full">
-            <h2 className="text-3xl font-bold text-[#9c7459] mb-6">Contact Us</h2>
+            <h2 className="text-3xl font-bold text-[#9c7459] mb-6 flex items-center gap-2">
+              <span>Contact Us</span>
+              <span>🐾</span>
+            </h2>
             <div className="mb-6">
               <h3 className="text-xl font-bold mb-3 text-[#9c7459]">Main Office</h3>
               <p className="text-beige">Box 2737</p>
@@ -102,9 +105,12 @@ const ContactPage = () => {
         </section>
 
         {/* Contact Form Section */}
-        <section className="pt-16">
+        <section className="pt-16 transition-transform duration-700 hover:scale-[1.02]">
           <div className="bg-white shadow-md rounded-lg p-8 md:p-10 lg:p-12 space-y-8 h-full">
-          <h2 className="text-3xl font-bold text-[#9c7459] mb-6 text-center">Get In Touch</h2>  
+          <h2 className="text-3xl font-bold text-[#9c7459] mb-6 text-center flex items-center justify-center gap-2">
+            <span>Get In Touch</span>
+            <span>🐾</span>
+          </h2>  
             {formStatus.submitted ? (
               <div className="text-center py-8">
                 <div className="text-green-600 text-5xl mb-4">✓</div>
@@ -185,7 +191,7 @@ const ContactPage = () => {
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    className="bg-[#9c7459] hover:bg-[#7d5c46] text-white px-6 py-3 rounded-lg transition duration-300"
+                    className="bg-[#9c7459] hover:bg-[#7d5c46] text-white px-6 py-3 rounded-lg transition duration-300 shadow-md"
                   >
                     Send Message
                   </button>
