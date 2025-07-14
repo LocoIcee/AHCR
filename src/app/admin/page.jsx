@@ -514,8 +514,8 @@ const AdminPage = () => {
       <div className="flex justify-end pb-4">
         {/* Fundraiser/Dog view switcher */}
         <div className="flex space-x-4 mb-6 mr-auto">
-          <button onClick={() => setAdminView('dogs')} className={adminView==='dogs' ? 'bg-[#7d5c46] text-white py-2 px-4 rounded-md' : 'bg-gray-200 py-2 px-4 rounded-md'}>Manage Dogs</button>
-          <button onClick={() => setAdminView('fundraisers')} className={adminView==='fundraisers' ? 'bg-[#7d5c46] text-white py-2 px-4 rounded-md' : 'bg-gray-200 py-2 px-4 rounded-md'}>Manage Fundraisers</button>
+          <button onClick={() => setAdminView('dogs')} className={adminView==='dogs' ? 'bg-primary text-white py-2 px-4 rounded-md' : 'bg-gray-200 py-2 px-4 rounded-md'}>Manage Dogs</button>
+          <button onClick={() => setAdminView('fundraisers')} className={adminView==='fundraisers' ? 'bg-primary text-white py-2 px-4 rounded-md' : 'bg-gray-200 py-2 px-4 rounded-md'}>Manage Fundraisers</button>
         </div>
         <button
           onClick={async () => {
@@ -581,10 +581,10 @@ const AdminPage = () => {
       {adminView==='dogs' && (
         <>
       <div className="flex items-center space-x-10 mt-12 mb-6">
-        <h2 className="text-2xl font-bold text-[#7d5c46]">Current Dogs</h2>
+        <h2 className="text-2xl font-bold text-darkbrown">Current Dogs</h2>
         <button
           onClick={() => setShowFormModal(true)}
-          className="bg-[#9c7459] text-white py-2 px-6 rounded-md hover:bg-[#7d5c46] transition-colors flex items-center justify-center"
+          className="bg-primary text-white py-2 px-6 rounded-md hover:bg-darkbrown transition-colors flex items-center justify-center"
           disabled={loading}
         >
           {loading ? <Spinner /> : 'Add Dog'}
@@ -612,7 +612,7 @@ const AdminPage = () => {
             >
               ✕
             </button>
-            <h1 className="text-2xl font-bold text-center mb-4 text-[#7d5c46]">
+            <h1 className="text-2xl font-bold text-center mb-4 text-darkbrown">
               {isEditing ? 'Edit Dog' : 'Add New Dog'}
             </h1>
             {notification.show && (
@@ -644,7 +644,7 @@ const AdminPage = () => {
                     placeholder="Dog's name"
                     onChange={handleChange}
                     value={dogData.name}
-                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary focus:border-primary outline-none"
                     required
                   />
                 </div>
@@ -664,7 +664,7 @@ const AdminPage = () => {
                           age: { ...dogData.age, weeks: parseInt(e.target.value) || 0 },
                         })
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
+                      className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary focus:border-primary outline-none"
                       required
                     />
                     <input
@@ -679,7 +679,7 @@ const AdminPage = () => {
                           age: { ...dogData.age, months: parseInt(e.target.value) || 0 },
                         })
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
+                      className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary focus:border-primary outline-none"
                       required
                     />
                     <input
@@ -694,7 +694,7 @@ const AdminPage = () => {
                           age: { ...dogData.age, years: parseInt(e.target.value) || 0 },
                         })
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
+                      className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary focus:border-primary outline-none"
                       required
                     />
                   </div>
@@ -709,7 +709,7 @@ const AdminPage = () => {
                     placeholder="Dog's breed"
                     onChange={handleChange}
                     value={dogData.breed}
-                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary focus:border-primary outline-none"
                     required
                   />
                 </div>
@@ -721,7 +721,7 @@ const AdminPage = () => {
                     name="sex"
                     value={dogData.sex}
                     onChange={handleChange}
-                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary focus:border-primary outline-none"
                     required
                   >
                     <option value="">Select sex</option>
@@ -737,7 +737,7 @@ const AdminPage = () => {
                     name="availability"
                     value={dogData.availability}
                     onChange={handleChange}
-                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary focus:border-primary outline-none"
                     required
                   >
                     <option value="available">Available</option>
@@ -756,7 +756,7 @@ const AdminPage = () => {
                   onChange={handleChange}
                   value={dogData.description}
                   maxLength={1000}
-                  className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#9c7459] focus:border-[#9c7459] outline-none"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary focus:border-primary outline-none"
                   required
                 ></textarea>
               </div>
@@ -823,7 +823,7 @@ const AdminPage = () => {
                   {isUploading && (
                     <div className="w-full bg-gray-200 rounded-full h-2.5">
                       <div
-                        className="bg-[#9c7459] h-2.5 rounded-full"
+                        className="bg-primary h-2.5 rounded-full"
                         style={{ width: `${uploadProgress}%` }}
                       ></div>
                     </div>
@@ -848,7 +848,7 @@ const AdminPage = () => {
               <div className="flex space-x-4">
                 <button
                   type="submit"
-                  className="bg-[#9c7459] text-white py-3 px-6 rounded-md hover:bg-[#7d5c46] transition-colors flex-1 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+                  className="bg-primary text-white py-3 px-6 rounded-md hover:bg-darkbrown transition-colors flex-1 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
                   disabled={loading}
                 >
                   {loading ? <Spinner /> : (isEditing ? 'Update Dog' : 'Add Dog')}
@@ -938,7 +938,7 @@ const AdminPage = () => {
                   </button>
                   <button
                     onClick={() => handleAdoptClick(dog.id)}
-                    className="bg-[#7d5c46] hover:bg-[#5f4735] text-white py-2 px-4 rounded-md transition-colors flex items-center justify-center"
+                    className="bg-primary hover:bg-darkbrown text-white py-2 px-4 rounded-md transition-colors flex items-center justify-center"
                     disabled={loading}
                   >
                     {loading ? <Spinner /> : 'Adopted'}
@@ -975,7 +975,7 @@ const AdminPage = () => {
               </button>
               <button
                 onClick={confirmAdopt}
-                className="bg-[#9c7459] text-white px-4 py-2 rounded-md hover:bg-[#7d5c46] flex items-center justify-center"
+                className="bg-primary text-white px-4 py-2 rounded-md hover:bg-darkbrown flex items-center justify-center"
                 disabled={loading}
               >
                 {loading ? <Spinner /> : 'Yes, Adopted'}
@@ -991,10 +991,10 @@ const AdminPage = () => {
       {adminView==='fundraisers' && (
         <>
       <div className="flex items-center space-x-10 mt-12 mb-6">
-        <h2 className="text-2xl font-bold text-[#7d5c46]">Fundraisers</h2>
+        <h2 className="text-2xl font-bold text-darkbrown">Fundraisers</h2>
         <button
           onClick={() => setShowFundraiserModal(true)}
-          className="bg-[#9c7459] text-white py-2 px-6 rounded-md hover:bg-[#7d5c46]"
+          className="bg-primary text-white py-2 px-6 rounded-md hover:bg-darkbrown"
           disabled={loading}
         >
           {loading ? <Spinner /> : 'Add Fundraiser'}
@@ -1053,7 +1053,7 @@ const AdminPage = () => {
               onClick={() => { setShowFundraiserModal(false); setFundraiserData(initialFundraiserData); setIsFundraiserEditing(false); setEditingFundraiserId(null); setPreviewUrl([]); setSelectedFile([]); }}>
               ✕
             </button>
-            <h1 className="text-2xl font-bold text-center mb-4 text-[#7d5c46]">
+            <h1 className="text-2xl font-bold text-center mb-4 text-darkbrown">
               {isFundraiserEditing ? 'Edit Fundraiser' : 'Add New Fundraiser'}
             </h1>
             {notification.show && (
@@ -1226,7 +1226,7 @@ const AdminPage = () => {
                 </div>
               </div>
               <div className="flex space-x-4">
-                <button type="submit" className="bg-[#9c7459] text-white px-6 py-3 rounded-md">{loading ? <Spinner/> : (isFundraiserEditing ? 'Update' : 'Add')}</button>
+                <button type="submit" className="bg-primary text-white px-6 py-3 rounded-md">{loading ? <Spinner/> : (isFundraiserEditing ? 'Update' : 'Add')}</button>
                 {isFundraiserEditing && (
                   <button type="button" onClick={() => { setShowFundraiserModal(false); setFundraiserData(initialFundraiserData); setIsFundraiserEditing(false); setEditingFundraiserId(null); }} className="bg-gray-300 px-6 py-3 rounded-md">Cancel</button>
                 )}
