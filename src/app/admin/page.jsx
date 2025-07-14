@@ -594,7 +594,7 @@ const AdminPage = () => {
       {/* Modal for Add/Edit Dog */}
       {showFormModal && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-white/30"
+          className="fixed inset-0 z-50 flex items-center justify-center overflow-auto backdrop-blur-sm bg-white/30"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               setShowFormModal(false);
@@ -602,7 +602,7 @@ const AdminPage = () => {
             }
           }}
         >
-          <div className="bg-white rounded-lg shadow-lg w-full max-w-5xl p-6 relative overflow-y-auto">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-5xl max-h-[90vh] p-6 relative overflow-y-auto">
             <button
               className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
               onClick={() => {
@@ -1046,9 +1046,9 @@ const AdminPage = () => {
 
       {/* FUNDRAISER MODAL */}
       {showFundraiserModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-white/30"
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-auto backdrop-blur-sm bg-white/30"
           onClick={(e) => { if (e.target === e.currentTarget) { setShowFundraiserModal(false); setFundraiserData(initialFundraiserData); setIsFundraiserEditing(false); setEditingFundraiserId(null); setPreviewUrl([]); setSelectedFile([]); } }}>
-          <div className="bg-white rounded-lg shadow-lg w-full max-w-5xl p-6 relative overflow-y-auto">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-5xl max-h-[90vh] p-6 relative overflow-y-auto">
             <button className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
               onClick={() => { setShowFundraiserModal(false); setFundraiserData(initialFundraiserData); setIsFundraiserEditing(false); setEditingFundraiserId(null); setPreviewUrl([]); setSelectedFile([]); }}>
               ✕
