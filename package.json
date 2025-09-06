@@ -17,7 +17,7 @@
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "stripe": "^18.2.1"
+    "square": "^43.0.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
