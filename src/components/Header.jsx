@@ -71,7 +71,7 @@ const Header = () => {
         <div className="hidden md:flex items-center space-x-4">
           <div>
             <Link
-              href="https://checkout.square.site/merchant/MLSXQJBBJVQV7/checkout/LUXJHV37L4CAP736EHBCGHFY"
+              href="https://www.canadahelps.org/en/dn/135877"
               className="border border-white px-5 py-2 rounded-lg text-center text-white font-medium hover:bg-white hover:text-[#9c7459] transition-colors w-full"
             >
               DONATE
@@ -102,7 +102,7 @@ const Header = () => {
               <div className="pt-2 pb-3 flex flex-col space-y-3">
                 <div>
                   <Link
-                    href="https://checkout.square.site/merchant/MLSXQJBBJVQV7/checkout/LUXJHV37L4CAP736EHBCGHFY"
+                    href="https://www.canadahelps.org/en/dn/135877"
                     className="border border-white px-5 py-2 rounded-lg text-center text-white font-medium hover:bg-white hover:text-[#9c7459] transition-colors w-full"
                   >
                     DONATE
