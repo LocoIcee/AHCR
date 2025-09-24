@@ -67,7 +67,7 @@ const FundraisersPage = () => {
   }, [filter, allFundraisers]);
 
   return (
-    <main className="pt-24 sm:pt-28 pb-16 min-h-screen bg-gray-50">
+    <main className="pt-24 pb-16 min-h-screen bg-gray-50">
       <section>
         <div className="relative mb-10 sm:mb-12 bg-gradient-to-r from-[#f8f4f1] to-[#e2d2c5] py-10 sm:py-12 shadow-lg overflow-hidden w-full">
           {/* Decorative paw prints */}
