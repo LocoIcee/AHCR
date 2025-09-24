@@ -31,16 +31,19 @@ const Header = () => {
 
   return (
     <header className={`bg-gradient-to-t from-[#9c7459]/95 to-[#cdb7a3] text-white transition-transform duration-300 fixed w-full z-50 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-3 relative">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <Logo className="h-24 w-24" />
+          <Logo className="h-24 w-24 sm:h-20 sm:w-20" />
         </Link>
 
         {/* Mobile menu button */}
-        <button 
+        <button
+          type="button"
           className="md:hidden text-white"
           onClick={toggleMenu}
+          aria-label="Toggle navigation"
+          aria-expanded={isMenuOpen}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path>
@@ -49,9 +52,9 @@ const Header = () => {
 
         {/* Navigation - Desktop */}
         <nav className="hidden md:flex items-center justify-center space-x-8 flex-1">
-          <div className="relative flex items-center space-x-6">
+          <div className="relative flex items-center space-x-4 xl:space-x-6">
             {/* Paw prints decoration */}
-            <div className="absolute -left-12 opacity-70">
+            <div className="absolute -left-12 hidden lg:block opacity-70">
               <PawPrint className="h-12 w-12 text-white" />
             </div>
 
@@ -79,7 +82,7 @@ const Header = () => {
             <a href="https://facebook.com/AHCRYYC" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <FacebookIcon className="h-6 w-6 text-white hover:text-gray-200 transition-colors" />
             </a>
-            <a href="https://instagram.com/almost_home_canine_rescue" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a href="https://instagram.com/ahcr.society" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <InstagramIcon className="h-6 w-6 text-white hover:text-gray-200 transition-colors" />
             </a>
           </div>
@@ -87,12 +90,12 @@ const Header = () => {
 
         {/* Mobile menu dropdown */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-30 left-0 right-0 bg-gradient-to-t from-[#9c7459] to-[#b19070] z-20">
-            <div className="px-4 py-2 space-y-3 flex flex-col">
+          <div className="md:hidden absolute inset-x-0 top-full mt-2 bg-gradient-to-t from-[#9c7459] to-[#b19070] shadow-lg rounded-b-lg z-20">
+            <div className="px-4 py-3 space-y-3 flex flex-col">
               <Link href="/" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Home</Link>
               <Link href="/adopt" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Adopt</Link>
               <Link href="/foster" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Foster</Link>
-              <Link href="/get-involved" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Get Involved</Link> 
+              <Link href="/getinvolved" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Get Involved</Link> 
               <Link href="/fundraisers" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Fundraisers</Link>
               <Link href="/contact" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Contact Us</Link>
               <Link href="/happytails" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Happy Tails</Link>
@@ -107,10 +110,10 @@ const Header = () => {
                   </Link>
                 </div>
                 <div className="flex justify-center space-x-4 pt-2">
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  <a href="https://facebook.com/AHCRYYC" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                     <FacebookIcon className="h-6 w-6 text-white hover:text-gray-200 transition-colors" />
                   </a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <a href="https://instagram.com/ahcr.society" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                     <InstagramIcon className="h-6 w-6 text-white hover:text-gray-200 transition-colors" />
                   </a>
                 </div>

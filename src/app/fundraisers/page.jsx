@@ -67,9 +67,9 @@ const FundraisersPage = () => {
   }, [filter, allFundraisers]);
 
   return (
-    <main className="pt-32 pb-16 min-h-screen bg-gray-50">
+    <main className="pt-24 sm:pt-28 pb-16 min-h-screen bg-gray-50">
       <section>
-        <div className="relative mb-10 bg-gradient-to-r from-[#f8f4f1] to-[#e2d2c5] py-12 shadow-lg overflow-hidden w-full">
+        <div className="relative mb-10 sm:mb-12 bg-gradient-to-r from-[#f8f4f1] to-[#e2d2c5] py-10 sm:py-12 shadow-lg overflow-hidden w-full">
           {/* Decorative paw prints */}
           <div className="absolute -top-8 left-1/4 transform -translate-x-1/2 opacity-20 animate-bounce">
             <PawPrint className="h-28 w-28 text-[#9c7459]" />
@@ -78,10 +78,10 @@ const FundraisersPage = () => {
             <PawPrint className="h-24 w-24 text-[#9c7459]" />
           </div>
           <div className="relative z-10 text-center px-4">
-            <h1 className="text-5xl md:text-6xl font-extrabold text-[#7d5c46] mb-4 drop-shadow">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#7d5c46] mb-3 drop-shadow">
               Fundraisers
             </h1>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto">
               Support our mission to rescue and rehome dogs in need by contributing to one of our fundraising campaigns.
             </p>
           </div>
@@ -89,10 +89,10 @@ const FundraisersPage = () => {
         
         <div className="container mx-auto px-4">
           <div className="flex justify-center mb-8">
-            <div className="inline-flex bg-white rounded-lg p-1 shadow-sm">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 bg-white rounded-lg p-2 shadow-sm">
               <button
                 onClick={() => setFilter('all')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`w-full sm:w-auto px-4 py-2 rounded-md text-sm sm:text-base font-medium transition-colors ${
                   filter === 'all' ? 'bg-[#9c7459] text-white' : 'text-gray-700 hover:bg-gray-100'
                 }`}
               >
@@ -100,7 +100,7 @@ const FundraisersPage = () => {
               </button>
               <button
                 onClick={() => setFilter('active')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`w-full sm:w-auto px-4 py-2 rounded-md text-sm sm:text-base font-medium transition-colors ${
                   filter === 'active' ? 'bg-[#9c7459] text-white' : 'text-gray-700 hover:bg-gray-100'
                 }`}
               >
@@ -108,7 +108,7 @@ const FundraisersPage = () => {
               </button>
               <button
                 onClick={() => setFilter('upcoming')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`w-full sm:w-auto px-4 py-2 rounded-md text-sm sm:text-base font-medium transition-colors ${
                   filter === 'upcoming' ? 'bg-[#9c7459] text-white' : 'text-gray-700 hover:bg-gray-100'
                 }`}
               >
@@ -116,7 +116,7 @@ const FundraisersPage = () => {
               </button>
               <button
                 onClick={() => setFilter('past')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`w-full sm:w-auto px-4 py-2 rounded-md text-sm sm:text-base font-medium transition-colors ${
                   filter === 'past' ? 'bg-[#9c7459] text-white' : 'text-gray-700 hover:bg-gray-100'
                 }`}
               >
@@ -126,7 +126,7 @@ const FundraisersPage = () => {
           </div>
           
           {fundraisers.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8">
               {fundraisers.map(fundraiser => (
                 <FundraiserCard
                   key={fundraiser.id}
@@ -142,13 +142,13 @@ const FundraisersPage = () => {
 
           <div className="mt-16 bg-[#f0e6de] rounded-lg p-8 shadow-md">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold text-[#9c7459] mb-4">Start Your Own Fundraiser</h2>
-              <p className="text-gray-700 mb-6">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#9c7459] mb-3 sm:mb-4">Start Your Own Fundraiser</h2>
+              <p className="text-gray-700 text-sm sm:text-base mb-6">
                 Help support Almost Home Canine Rescue by starting your own fundraiser to provide food, medical care, and safe shelter for dogs in need. Every contribution gives them a better chance at finding a forever home.
               </p>
               <a
                 href="/contact"
-                className="inline-block bg-[#9c7459] hover:bg-[#86644c] text-white py-3 px-6 rounded-md font-medium text-lg transition-colors"
+                className="inline-block bg-[#9c7459] hover:bg-[#86644c] text-white py-3 px-6 rounded-md font-medium text-base sm:text-lg transition-colors"
               >
                 Contact Us to Get Started
               </a>
