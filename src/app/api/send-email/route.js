@@ -4,6 +4,7 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY ?? '');
 const CONTACT_RECIPIENT = process.env.CONTACT_RECIPIENT_EMAIL ?? 'almosthomecaninerescue@gmail.com';
 const FROM_ADDRESS = process.env.RESEND_FROM_EMAIL;
+const RESEND_SENDER = process.env.RESEND_BUILTIN_SENDER ?? 'Almost Home Canine Rescue <onboarding@resend.dev>';
 const HCAPTCHA_SECRET = process.env.HCAPTCHA_SECRET_KEY;
 const HCAPTCHA_VERIFY_URL = 'https://hcaptcha.com/siteverify';
 
@@ -17,7 +18,7 @@ export async function POST(request) {
 
   if (!FROM_ADDRESS) {
     console.error('Missing RESEND_FROM_EMAIL environment variable.');
-    return NextResponse.json({ error: 'Email service sender not configured.' }, { status: 500 });
+    return NextResponse.json({ error: 'Email reply address not configured.' }, { status: 500 });
   }
 
   if (!HCAPTCHA_SECRET) {
@@ -85,9 +86,9 @@ export async function POST(request) {
 
   try {
     await resend.emails.send({
-      from: FROM_ADDRESS,
+      from: RESEND_SENDER,
       to: CONTACT_RECIPIENT,
-      replyTo: email,
+      reply_to: FROM_ADDRESS,
       subject: `AHCR Contact Form: ${safeSubject}`,
       text: `New contact form submission from the AHCR website.\n\n` +
         `Name: ${submissionSummary.name}\n` +
