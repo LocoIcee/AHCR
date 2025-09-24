@@ -15,6 +15,7 @@ const Footer = () => {
       <p className="mt-4">PO Box 2737</p>
       <p>Lac La Biche, AB</p>
       <p>T2A 2C0</p>
+      <p className="mt-4 text-xs tracking-[0.35em] text-gray-200 uppercase">Charity Number #767534902RR0001</p>
       <div className="flex justify-center gap-4 mt-4">
         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
           <FacebookIcon className="h-6 w-6 text-white hover:text-gray-300" />

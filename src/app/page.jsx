@@ -24,6 +24,11 @@ export default function Home() {
               Meet &amp; greets are by appointment<br />only after initial phone interview.
             </div>
           </h2>
+          <div className="mt-8 flex justify-center">
+            <span className="rounded-full border border-[#523A28] bg-white/90 px-8 py-3 text-sm sm:text-base font-semibold tracking-[0.25em] text-[#523A28] uppercase">
+              Charity Number #767534902RR0001
+            </span>
+          </div>
         </div>
       </section>
 
@@ -168,3 +173,4 @@ export default function Home() {
     </div>
   );
 };
+
