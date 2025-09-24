@@ -69,7 +69,7 @@ const FundraisersPage = () => {
   return (
     <main className="pt-32 pb-16 min-h-screen bg-gray-50">
       <section>
-        <div className="relative mb-12 bg-gradient-to-r from-[#f8f4f1] to-[#e2d2c5] py-12 shadow-lg overflow-hidden w-full">
+        <div className="relative mb-10 bg-gradient-to-r from-[#f8f4f1] to-[#e2d2c5] py-12 shadow-lg overflow-hidden w-full">
           {/* Decorative paw prints */}
           <div className="absolute -top-8 left-1/4 transform -translate-x-1/2 opacity-20 animate-bounce">
             <PawPrint className="h-28 w-28 text-[#9c7459]" />
