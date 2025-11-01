@@ -90,7 +90,7 @@ const Header = () => {
 
         {/* Mobile menu dropdown */}
         {isMenuOpen && (
-          <div className="md:hidden absolute inset-x-0 top-full mt-2 bg-gradient-to-t from-[#9c7459] to-[#b19070] shadow-lg rounded-b-lg z-20">
+          <div className="md:hidden absolute inset-x-0 top-full bg-gradient-to-t from-[#9c7459] to-[#b19070] shadow-lg rounded-b-lg z-20">
             <div className="px-4 py-3 space-y-3 flex flex-col">
               <Link href="/" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Home</Link>
               <Link href="/adopt" className="py-2 text-white hover:text-gray-200 transition-colors" onClick={toggleMenu}>Adopt</Link>
