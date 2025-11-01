@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const ImageCarousel = ({ images, onClose }) => {
+const PLACEHOLDER_SRC = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="100%" height="100%" fill="%23f3f4f6"/><text x="50%" y="50%" fill="%239ca3af" font-family="Arial" font-size="20" text-anchor="middle" dominant-baseline="middle">Media unavailable</text></svg>';
+
+const ImageCarousel = ({ images = [], onClose = () => {} }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const hasImages = Array.isArray(images) && images.length > 0;
+
+  useEffect(() => {
+    if (!hasImages) return;
+    setCurrentIndex(0);
+  }, [hasImages]);
 
   // Handle keyboard navigation
   useEffect(() => {
+    if (!hasImages) return;
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowLeft') {
         handlePrev();
@@ -23,9 +32,10 @@ const ImageCarousel = ({ images, onClose }) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onClose]);
+  }, [hasImages, onClose]);
 
   const handleNext = () => {
+    if (!hasImages) return;
     if (isAnimating) return;
     setIsAnimating(true);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -33,6 +43,7 @@ const ImageCarousel = ({ images, onClose }) => {
   };
 
   const handlePrev = () => {
+    if (!hasImages) return;
     if (isAnimating) return;
     setIsAnimating(true);
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
@@ -59,23 +70,13 @@ const ImageCarousel = ({ images, onClose }) => {
     }
   };
 
-  // Calculate dot indices for pagination
-  const getVisibleDots = () => {
-    if (images.length <= 5) return images.map((_, i) => i);
-    
-    let dots = [currentIndex];
-    let left = currentIndex;
-    let right = currentIndex;
-    
-    // Add 2 dots on each side if possible
-    for (let i = 0; i < 2; i++) {
-      left = (left - 1 + images.length) % images.length;
-      right = (right + 1) % images.length;
-      dots.push(left, right);
-    }
-    
-    return [...new Set(dots)].sort((a, b) => a - b);
-  };
+  if (!hasImages) {
+    return (
+      <div className="w-full h-full min-h-[280px] flex items-center justify-center rounded-lg bg-gray-100 text-gray-400 text-sm">
+        Media coming soon
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-full relative">
@@ -90,12 +91,12 @@ const ImageCarousel = ({ images, onClose }) => {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="h-full w-full bg-gray-100">
+        <div className="h-full w-full bg-gray-100 flex items-center justify-center">
           {/\.(mp4|webm|ogg)$/i.test(images[currentIndex]) ? (
             <video
               src={images[currentIndex]}
               controls
-              className="w-full h-full object-cover"
+              className="max-h-full max-w-full object-contain"
               style={{
                 transition: "opacity 0.3s ease",
                 opacity: isAnimating ? 0.7 : 1
@@ -105,14 +106,14 @@ const ImageCarousel = ({ images, onClose }) => {
             <img
               src={images[currentIndex]}
               alt={`Image ${currentIndex + 1}`}
-              className="w-full h-full object-cover"
+              className="max-h-full max-w-full object-contain"
               style={{
                 transition: "opacity 0.3s ease",
                 opacity: isAnimating ? 0.7 : 1
               }}
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = `${import.meta.env.BASE_URL}assets/images/placeholder.png`;
+                e.target.src = PLACEHOLDER_SRC;
               }}
             />
           )}
@@ -169,8 +170,13 @@ const ImageCarousel = ({ images, onClose }) => {
 };
 
 ImageCarousel.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onClose: PropTypes.func.isRequired
+  images: PropTypes.arrayOf(PropTypes.string),
+  onClose: PropTypes.func
+};
+
+ImageCarousel.defaultProps = {
+  images: [],
+  onClose: () => {}
 };
 
 export default ImageCarousel;
