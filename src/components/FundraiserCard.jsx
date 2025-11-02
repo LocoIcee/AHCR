@@ -57,7 +57,7 @@ const FundraiserCard = ({
     <div className="bg-white rounded-3xl shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl overflow-hidden">
       <div className="relative aspect-[16/9] bg-[#f8f4f1]">
         {hasImages ? (
-          <ImageCarousel images={images} />
+          <ImageCarousel images={images} minHeight="auto" />
         ) : (
           <div className="flex h-full items-center justify-center text-gray-400 text-sm">
             Images coming soon

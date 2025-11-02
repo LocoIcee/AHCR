@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 
 const PLACEHOLDER_SRC = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="100%" height="100%" fill="%23f3f4f6"/><text x="50%" y="50%" fill="%239ca3af" font-family="Arial" font-size="20" text-anchor="middle" dominant-baseline="middle">Media unavailable</text></svg>';
 
-const ImageCarousel = ({ images = [], onClose = () => {} }) => {
+const ImageCarousel = ({ images = [], onClose = () => {}, minHeight = 300 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const hasImages = Array.isArray(images) && images.length > 0;
+  const containerMinHeight = minHeight == null
+    ? undefined
+    : (typeof minHeight === 'number' ? `${minHeight}px` : minHeight);
 
   useEffect(() => {
     if (!hasImages) return;
@@ -72,7 +75,7 @@ const ImageCarousel = ({ images = [], onClose = () => {} }) => {
 
   if (!hasImages) {
     return (
-      <div className="w-full h-full min-h-[280px] flex items-center justify-center rounded-lg bg-gray-100 text-gray-400 text-sm">
+      <div className="w-full h-full min-h-[220px] sm:min-h-[280px] flex items-center justify-center rounded-lg bg-gray-100 text-gray-400 text-sm">
         Media coming soon
       </div>
     );
@@ -85,7 +88,7 @@ const ImageCarousel = ({ images = [], onClose = () => {} }) => {
         className="w-full relative overflow-hidden rounded-lg"
         style={{ 
           height: "100%",
-          minHeight: "300px"
+          minHeight: containerMinHeight
         }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -171,12 +174,17 @@ const ImageCarousel = ({ images = [], onClose = () => {} }) => {
 
 ImageCarousel.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string),
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  minHeight: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string
+  ])
 };
 
 ImageCarousel.defaultProps = {
   images: [],
-  onClose: () => {}
+  onClose: () => {},
+  minHeight: 300
 };
 
 export default ImageCarousel;
