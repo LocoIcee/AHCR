@@ -337,7 +337,9 @@ const AdminPage = () => {
       const filename = `${crypto.randomUUID()}.${file.name.split('.').pop()}`;
       const { data, error } = await supabase.storage
         .from('dog-images')
-        .upload(`adopt/${filename}`, file);
+        .upload(`adopt/${filename}`, file, {
+          cacheControl: '31536000',
+        });
 
       if (error) throw error;
 
